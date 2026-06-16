@@ -10,6 +10,9 @@
   --pink: #ff5c9c;
   --amber: #ffcc72;
   --shadow: 0 28px 72px rgba(0, 0, 0, 0.32);
+  --font-body: "阿里巴巴普惠体 3.0 55 Regular", "阿里巴巴普惠体 2.0 55 Regular", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  --font-heading: "阿里巴巴普惠体 3.0 65 Medium", "阿里巴巴普惠体 2.0 65 Medium", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
+  --font-display: "阿里巴巴普惠体 3.0 85 Bold", "阿里巴巴普惠体 2.0 85 Bold", "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", sans-serif;
 }
 
 * {
@@ -22,7 +25,19 @@ body {
   min-height: 100%;
   background: var(--bg);
   color: var(--ink);
-  font-family: "Noto Sans SC", sans-serif;
+  font-family: var(--font-body);
+}
+
+h1,
+h2 {
+  font-family: var(--font-display);
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
 }
 
 body {
@@ -210,6 +225,7 @@ body.can-scroll {
   font-size: clamp(4.6rem, 11.8vw, 9.2rem);
   line-height: 0.96;
   font-weight: 900;
+  font-family: var(--font-display);
   letter-spacing: 0.04em;
   color: rgba(248, 250, 255, 0.82);
   white-space: nowrap;
@@ -238,6 +254,7 @@ body.can-scroll {
 .subhead {
   margin: 0;
   font-size: clamp(1.18rem, 2vw, 1.6rem);
+  font-family: var(--font-heading);
   letter-spacing: 0.16em;
   color: rgba(255, 255, 255, 0.68);
   opacity: 0;
@@ -544,6 +561,7 @@ body.can-scroll {
   text-decoration: none;
   font-size: 1.02rem;
   font-weight: 600;
+  font-family: var(--font-heading);
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
   transition:
@@ -584,6 +602,7 @@ body.can-scroll {
   margin-bottom: 1rem;
   font-size: 0.82rem;
   font-weight: 700;
+  font-family: var(--font-heading);
   letter-spacing: 0.22em;
   color: rgba(255, 255, 255, 0.46);
 }
@@ -597,6 +616,7 @@ body.can-scroll {
 .section-copy h2 {
   margin: 0 0 1rem;
   font-size: clamp(2.2rem, 5vw, 4.4rem);
+  font-family: var(--font-display);
   line-height: 1.02;
   letter-spacing: -0.03em;
 }
@@ -935,6 +955,7 @@ body.can-scroll {
   font-size: 0.95rem;
   line-height: 1.35;
   font-weight: 600;
+  font-family: var(--font-heading);
   color: rgba(246, 249, 255, 0.95);
   word-break: break-all;
 }
@@ -1042,6 +1063,7 @@ body.can-scroll {
   border-radius: 999px;
   border: 1px solid rgba(255, 255, 255, 0.12);
   font-size: 0.73rem;
+  font-family: var(--font-heading);
   letter-spacing: 0.18em;
   color: rgba(222, 231, 244, 0.7);
   background: rgba(255, 255, 255, 0.04);
@@ -1051,6 +1073,7 @@ body.can-scroll {
   margin: 0;
   padding: 0 1rem;
   font-size: clamp(1.9rem, 3vw, 2.8rem);
+  font-family: var(--font-display);
   letter-spacing: -0.03em;
   line-height: 0.96;
 }
@@ -1147,6 +1170,7 @@ body.can-scroll {
   border-radius: 999px;
   color: rgba(255, 255, 255, 0.88);
   text-decoration: none;
+  font-family: var(--font-heading);
   background: rgba(255, 255, 255, 0.04);
   transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
 }
@@ -2531,6 +2555,7 @@ body.can-scroll {
   z-index: 1;
   margin: 0;
   font-size: 1rem;
+  font-family: var(--font-heading);
   line-height: 1.2;
 }
 
