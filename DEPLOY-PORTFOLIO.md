@@ -40,8 +40,8 @@ window.__portfolioRuntime = {
 <script src="./portfolio-runtime.js"></script>
 ```
 
-## 7. Vercel 环境变量
-在 Vercel 项目里添加这 4 个环境变量：
+## 7. 环境变量
+在 Vercel 或 Cloudflare Pages 项目里添加这 4 个环境变量：
 
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
@@ -55,6 +55,8 @@ window.__portfolioRuntime = {
 说明：
 - `SUPABASE_SERVICE_ROLE_KEY` 只放在 Vercel 环境变量里，绝对不要写到前端页面。
 - 这个 key 是给 `/api/upload-resume` 服务端接口用的。
+- Vercel 会走 `api/upload-resume.js`
+- Cloudflare Pages 会走 `functions/api/upload-resume.js`
 
 ## 8. 重新部署
 - 把 `portfolio-runtime.js` 一起提交部署。

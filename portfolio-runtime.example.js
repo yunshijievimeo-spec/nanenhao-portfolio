@@ -3,6 +3,6 @@
   // https://your-project.supabase.co/storage/v1/object/public/portfolio-assets/resume/current.jpg
   resumeUrl: "",
 
-  // Vercel 上的上传接口，默认就是 /api/upload-resume，一般不用改
+  // 上传接口路径。Vercel API 和 Cloudflare Pages Functions 都可以继续用这个路径
   resumeUploadApi: "/api/upload-resume"
 };
