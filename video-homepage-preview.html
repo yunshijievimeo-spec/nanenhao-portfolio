@@ -1,0 +1,1665 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>南豪作品集首页预览</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./video-homepage-preview.css" />
+    <script src="./portfolio-runtime.js"></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <section class="screen hero-screen" id="heroScreen">
+        <video
+          class="screen-video hero-video"
+          id="heroVideo"
+          src="./video-preview-assets/开头场记板动画.mp4"
+          autoplay
+          muted
+          playsinline
+          preload="auto"
+        ></video>
+        <div class="screen-overlay hero-overlay"></div>
+        <div class="noise-overlay"></div>
+        <button class="hero-audio-prompt" id="heroAudioPrompt" type="button" aria-label="点击开启声音">
+          <span class="hero-audio-prompt-rings" aria-hidden="true">
+            <span class="hero-audio-prompt-ring hero-audio-prompt-ring--one"></span>
+            <span class="hero-audio-prompt-ring hero-audio-prompt-ring--two"></span>
+          </span>
+        </button>
+        <p class="hero-audio-prompt-text" id="heroAudioPromptText">点击开启声音</p>
+
+        <div class="hero-copy" id="heroCopy" aria-hidden="true">
+          <h1 class="fragment-title" aria-label="影像力就是影响力">
+            <span>影像力就是影响力</span>
+          </h1>
+          <p class="subhead">节奏 情绪 故事 在时间线上完成</p>
+
+          <div class="hero-actions">
+            <button class="sound-toggle" id="soundToggle" type="button" onclick="window.__toggleHeroPlayback && window.__toggleHeroPlayback(); return false;">点击开启声音</button>
+            <button class="scroll-cue" id="scrollCue" type="button" aria-label="切换到第二屏" onclick="window.__goToSecondScreen && window.__goToSecondScreen(); return false;">
+              <span class="chevron-stack" aria-hidden="true">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen second-screen" id="secondScreen">
+        <video
+          class="screen-video second-video"
+          id="secondVideo"
+          src="./video-preview-assets/第二屏视频.mp4"
+          muted
+          playsinline
+          preload="auto"
+        ></video>
+        <div class="screen-overlay second-overlay"></div>
+
+        <button class="screen-arrow sequence-arrow second-arrow" id="secondArrow" type="button" aria-label="切换到第三屏" onclick="window.__goToThirdScreen && window.__goToThirdScreen(); return false;">
+          <span class="arrow-layers" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </section>
+
+      <section class="screen third-screen" id="thirdScreen">
+        <video
+          class="screen-video third-text-video"
+          id="thirdTextVideo"
+          src="./video-preview-assets/第三屏更新视频.mp4"
+          muted
+          playsinline
+          preload="auto"
+        ></video>
+        <div class="screen-overlay third-overlay"></div>
+
+        <button class="screen-arrow sequence-arrow third-arrow" id="thirdArrow" type="button" aria-label="切换到第四屏" onclick="window.__goToFourthScreen && window.__goToFourthScreen(); return false;">
+          <span class="arrow-layers" aria-hidden="true">
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+      </section>
+
+      <section class="screen fourth-screen" id="fourthScreen">
+        <video
+          class="screen-video fourth-video"
+          id="fourthVideo"
+          src="./video-preview-assets/第三屏视频.mp4"
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
+        <div class="screen-overlay fourth-overlay"></div>
+
+        <div class="fourth-prompt">
+          <p>开场结束后，进入正式主页</p>
+          <button class="enter-portfolio" id="enterPortfolio" type="button" onclick="window.__goToPortfolio && window.__goToPortfolio(); return false;">进入主页</button>
+        </div>
+      </section>
+
+      <section class="portfolio-banner" aria-label="导演工作台横幅">
+        <img src="./hero-banner-assets/director-workbench.jpg" alt="导演剪辑工作台横幅图" />
+      </section>
+
+      <div class="portfolio-shell" id="portfolioShell">
+        <header class="portfolio-nav-shell">
+          <nav class="portfolio-nav" aria-label="主页跳转">
+            <a class="nav-pill" href="#companySection" onclick="window.__portfolioJump && window.__portfolioJump('#companySection'); return false;">工作过的公司</a>
+            <a class="nav-pill" href="#tvcSection" onclick="window.__portfolioJump && window.__portfolioJump('#tvcSection'); return false;">TVC广告片展示</a>
+            <a class="nav-pill" href="#socialSection" onclick="window.__portfolioJump && window.__portfolioJump('#socialSection'); return false;">短视频社媒宣传视频</a>
+            <a class="nav-pill" href="#livestreamSection" onclick="window.__portfolioJump && window.__portfolioJump('#livestreamSection'); return false;">抖音直播数据</a>
+            <a class="nav-pill" href="#playbackSection" onclick="window.__portfolioJump && window.__portfolioJump('#playbackSection'); return false;">视频播放数据</a>
+            <a class="nav-pill" href="#productionSection" onclick="window.__portfolioJump && window.__portfolioJump('#productionSection'); return false;">年度视频产出</a>
+          </nav>
+          <div class="portfolio-divider" aria-hidden="true"></div>
+        </header>
+
+        <section class="section-block portfolio-hero-section" id="portfolioHero">
+          <div class="portfolio-hero-grid">
+            <div class="portfolio-resume-column">
+              <aside class="resume-drift-slot" id="resumeDriftSlot" aria-label="个人简历展示">
+                <div class="resume-drift-card" id="resumeDriftCard">
+                  <div class="resume-drift-showcase">
+                    <div class="resume-showcase-light" aria-hidden="true"></div>
+                    <button class="resume-drift-sheet" id="resumePreviewButton" type="button" aria-label="放大查看个人简历">
+                      <img src="./resume-assets/resume-sheet.jpg" alt="个人简历" id="resumePreviewImage" />
+                    </button>
+                  </div>
+                </div>
+              </aside>
+
+              <div class="section-copy reveal-on-scroll">
+                <span class="section-kicker">OPENING TO PORTFOLIO</span>
+                <h2>个人简历</h2>
+                <p>点击可放大看</p>
+                <div class="hero-links hero-links--resume">
+                  <label class="ghost-link ghost-link--accent" for="resumeUploadInput">上传新简历预览</label>
+                </div>
+                <input class="resume-upload-input" id="resumeUploadInput" type="file" accept="image/*" />
+              </div>
+
+              <aside class="contact-glass-card reveal-on-scroll" aria-label="联系方式">
+                <div class="contact-glass-head">
+                  <span class="contact-glass-kicker">CONTACT</span>
+                  <a class="contact-download-button" id="resumeDownloadButton" href="./resume-assets/resume-sheet.jpg" download="南恩号-个人简历.jpg">下载简历</a>
+                </div>
+                <div class="contact-glass-body">
+                  <div class="contact-glass-meta">
+                    <div class="contact-glass-item">
+                      <span>电话</span>
+                      <strong>15626503764</strong>
+                    </div>
+                    <div class="contact-glass-item">
+                      <span>微信号</span>
+                      <strong>happyenhao123</strong>
+                    </div>
+                    <div class="contact-glass-item">
+                      <span>邮箱</span>
+                      <strong>nanenhao@163.com</strong>
+                    </div>
+                  </div>
+                  <div class="contact-glass-qr">
+                    <img src="./resume-assets/wechat-qr.png" alt="南恩号微信二维码" />
+                  </div>
+                </div>
+              </aside>
+            </div>
+
+            <aside class="portrait-intro-card reveal-on-scroll" aria-label="个人肖像与介绍">
+              <div class="portrait-intro-figure">
+                <img src="./resume-assets/portrait-cover.jpg" alt="南恩号个人肖像" />
+              </div>
+              <div class="portrait-intro-copy">
+                <span class="portrait-intro-kicker">ABOUT NAN EN HAO</span>
+                <h3>南恩号</h3>
+                <div class="portrait-intro-columns">
+                  <p>
+                    毕业于深圳大学，影视后期与视觉传达方向。从微博时代到抖音时代，从传统影视到 AI 流程化内容生产，十年里持续扎根互联网内容行业，先后经历精品工作室、头部 MCN、全球科技公司与品牌营销团队。
+                  </p>
+                  <p>
+                    这一路褪去青涩，但没有磨掉初心。我想找的从来不只是一份工作，而是一件愿意长期投入、真正能做成事业、也足够有意义的事。相比按点打卡、机械完成任务，我更在意内容是否有价值，项目是否真的能被做深、做成。
+                  </p>
+                  <p>
+                    工作十来年，我没有把自己活成行业里的老油条，反而越来越确认自己适合持续在一线创作与解决问题。我依旧保持初心，想做有意义的事，也始终愿意在内容、执行和结果上对自己提更高要求。
+                  </p>
+                  <p>
+                    这些年里，我始终保持着早到的工作习惯，几乎没有迟到过，也很少处在“卡点上班”的节奏里。身体的生物钟让我即使到了周末，也很难真正睡到很晚。偶尔也会羡慕那些能轻松睡懒觉的人，但这份对时间和状态的敏感，早已成为我工作方式的一部分。它不是表面的勤奋感，而是我对节奏、效率和投入度的天然要求。
+                  </p>
+                  <p>
+                    我习惯快速进入状态，也乐于持续学习新工具、新流程和新的内容表达方式。无论是品牌营销、社媒内容、直播转化，还是 AI 参与下的新型内容生产，我都希望自己不是被动跟随变化的人，而是能够主动理解变化、使用变化、创造变化的人。
+                  </p>
+                  <p>
+                    工作之外，喜欢骑行、爬山和接近自然，让身体和注意力都保持在线。对我来说，持续创作、持续学习、持续前进，不是阶段性的热情，而是一种稳定的生活方式。未来也希望和有意思的人一起，把有意思的事做成，把值得长期投入的事真正做出结果。
+                  </p>
+                </div>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section class="section-block company-section" id="companySection">
+          <div class="section-heading reveal-on-scroll">
+            <span class="section-kicker">CLIENTS / BRANDS</span>
+            <h2>工作过的公司</h2>
+            <p>这里先放文字和占位块，后面可以换成品牌 logo、项目名称、合作时间线或行业分类。</p>
+          </div>
+
+          <div class="company-marquee">
+            <div class="marquee-track">
+              <span>品牌合作</span>
+              <span>广告代理</span>
+              <span>内容团队</span>
+              <span>直播项目</span>
+              <span>品牌合作</span>
+              <span>广告代理</span>
+              <span>内容团队</span>
+              <span>迪士尼</span>
+              <span>孩之宝</span>
+              <span>变形金刚</span>
+              <span>IP</span>
+            </div>
+            <div class="marquee-track marquee-track--reverse">
+              <span>快消品牌</span>
+              <span>美妆护肤</span>
+              <span>3C 数码</span>
+              <span>本地生活</span>
+              <span>短剧投流</span>
+              <span>汽车内容</span>
+              <span>电商直播</span>
+              <span>社交平台</span>
+              <span>AI智能</span>
+              <span>AI剪辑</span>
+              <span>CODEX</span>
+              <span>TVC</span>
+            </div>
+          </div>
+
+          <div class="company-grid reveal-on-scroll">
+            <article class="info-card info-card--company">
+              <a class="company-card-link" href="https://www.hivemedia.cn/" target="_blank" rel="noopener noreferrer">
+                <div class="company-card-media">
+                  <img src="./company-assets/fengqun-cover.png" alt="蜂群文化项目封面图" />
+                </div>
+                <div class="company-card-copy">
+                  <span>工作过的公司 01</span>
+                  <strong>蜂群文化有限公司</strong>
+                  <p>头部 MCN 机构</p>
+                  <small>蜂群文化获由中国新媒体发展年会组委会评选的“年度十佳短视频 MCN 机构”</small>
+                </div>
+              </a>
+            </article>
+            <article class="info-card info-card--company">
+              <a class="company-card-link" href="https://www.robosen.cn/" target="_blank" rel="noopener noreferrer">
+                <div class="company-card-media">
+                  <img src="./company-assets/robosen-cover.png" alt="乐森机器人项目封面图" />
+                </div>
+                <div class="company-card-copy">
+                  <span>工作过的公司 02</span>
+                  <strong>乐森机器人有限公司</strong>
+                  <p>全球第一家做变形金刚全自动变形消费级机器人</p>
+                </div>
+              </a>
+            </article>
+            <article class="info-card info-card--company">
+              <a class="company-card-link" href="http://hhmartech.com/" target="_blank" rel="noopener noreferrer">
+                <div class="company-card-media">
+                  <img src="./company-assets/haoming-cover.png" alt="昊明数科有限公司项目封面图" />
+                </div>
+                <div class="company-card-copy">
+                  <span>工作过的公司 03</span>
+                  <strong>昊明数科有限公司</strong>
+                  <p>数字营销整合全方位供应商</p>
+                </div>
+              </a>
+            </article>
+          </div>
+        </section>
+
+        <div class="resume-lightbox" id="resumeLightbox" hidden>
+          <div class="resume-lightbox-backdrop" id="resumeLightboxBackdrop"></div>
+          <div class="resume-lightbox-panel">
+            <button class="resume-lightbox-close" id="resumeLightboxClose" type="button" aria-label="关闭简历放大预览">关闭</button>
+            <img src="./resume-assets/resume-sheet.jpg" alt="放大查看个人简历" id="resumeLightboxImage" />
+          </div>
+        </div>
+
+        <section class="section-block works-section" id="tvcSection">
+          <div class="section-heading reveal-on-scroll">
+            <span class="section-kicker">WORKS WALL</span>
+            <h2>TVC 广告片展示</h2>
+            <p>这一组先模拟横版作品卡片墙。以后每一张卡片都可以替换成真实封面，并点击跳转到视频平台播放。</p>
+          </div>
+
+          <div class="works-grid works-grid--primary">
+            <article class="work-card work-card--featured work-card--hero-cover reveal-on-scroll">
+              <div class="work-card-copy">
+                <strong>TVC 广告片外链播放</strong>
+                <p>这里不占页面视频空间，直接跳转到平台播放你的完整作品。</p>
+              </div>
+              <div class="work-card-actions">
+                <a
+                  class="work-card-link work-card-link--bili"
+                  href="https://www.bilibili.com/video/BV1UJ4m1H72a/?spm_id_from=333.337.search-card.all.click&vd_source=9e8bc52e088d3320e7155e7eae635fd3"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>B 站观看 威震天TVC</strong>
+                </a>
+                <a
+                  class="work-card-link work-card-link--accent work-card-link--douyin"
+                  href="https://www.douyin.com/user/MS4wLjABAAAA8CmJq6payvOtmnRcDgqFa4YZDt5cKq4UvPW0-T_Hy7h4D94dZ0lXjfGEOD7t06Cc?from_tab_name=main&modal_id=7486375319692266792"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <strong>抖音观看 大黄蜂TVC</strong>
+                </a>
+              </div>
+            </article>
+
+            <div class="work-stack">
+              <a
+                class="work-card work-card--cyan work-card--emotion reveal-on-scroll"
+                href="https://www.bilibili.com/video/BV1jwxyerEQk/?spm_id_from=333.1387.upload.video_card.click"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <strong>品牌情绪片</strong>
+              </a>
+              <a
+                class="work-card work-card--soundwave reveal-on-scroll"
+                href="https://www.douyin.com/user/self?from_tab_name=main&modal_id=7579871261065579802"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <strong>声波宣传片</strong>
+              </a>
+            </div>
+          </div>
+
+          <div class="works-ribbon">
+            <a
+              class="work-card work-card--amber work-card--interview reveal-on-scroll"
+              href="https://www.bilibili.com/video/BV1is421P7uM/?spm_id_from=333.1387.upload.video_card.click&vd_source=6c5438f1e303dbb711589737e7f6be13"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <strong>日本 TT 社设计师「大西裕弥」专访！</strong>
+            </a>
+            <a
+              class="work-card work-card--event reveal-on-scroll"
+              href="https://www.bilibili.com/video/BV1QmikYqE1P/?spm_id_from=333.1387.upload.video_card.click&vd_source=6c5438f1e303dbb711589737e7f6be13"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <strong>官方品牌活动现场</strong>
+            </a>
+            <a
+              class="work-card work-card--cyan work-card--product-mix reveal-on-scroll"
+              href="./video-preview-assets/公司产品集合_x264.mp4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <strong>变形产品混剪</strong>
+            </a>
+          </div>
+        </section>
+
+        <section class="section-block social-section" id="socialSection">
+          <div class="section-heading reveal-on-scroll">
+            <span class="section-kicker">SHORT FORM / SOCIAL</span>
+            <h2>短视频社媒宣传视频</h2>
+            <p>这里适合放投流视频、社媒内容、短视频矩阵和高频迭代版本，表现你在效率、节奏和转化上的能力。</p>
+          </div>
+
+          <div class="social-grid">
+            <a
+              class="social-card social-card--tall social-card--weibo reveal-on-scroll"
+              href="https://weibo.com/u/5741801557"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="card-chip">短视频矩阵</span>
+              <strong>短视频账号</strong>
+              <p>微博一杯主页</p>
+            </a>
+            <a
+              class="social-card social-card--wide social-card--xiaohongshu reveal-on-scroll"
+              href="https://www.xiaohongshu.com/explore/692d7c2f000000001e00d9e9?xsec_token=AB9GURYZC9xvHrkfiQ-CTTTs-Hilo69v2MIStMGXGOnYI=&xsec_source=pc_user"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="card-chip">社媒宣传视频</span>
+              <strong>小红书主页</strong>
+              <p>横版封面区块 / 账号主页入口</p>
+            </a>
+            <a
+              class="social-card social-card--pink social-card--hook reveal-on-scroll"
+              href="./social-assets/22_x264.mp4"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="card-chip">投流素材</span>
+              <strong>开头钩子 / 卖点强化</strong>
+            </a>
+            <a
+              class="social-card social-card--cyan social-card--series reveal-on-scroll"
+              href="https://weixin.qq.com/sph/A5CIhMOXDV"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <span class="card-chip">账号内容</span>
+              <strong>系列化更新节奏</strong>
+            </a>
+          </div>
+        </section>
+
+        <section class="section-block metrics-section" id="livestreamSection">
+          <div class="section-heading reveal-on-scroll">
+            <span class="section-kicker">DATA / PERFORMANCE</span>
+            <h2>抖音直播数据</h2>
+            <p>这一版先直接上 7 个真实案例卡片。每张卡片都保留原始截图，同时把 ROI、点击率、消耗、出单量这些核心数据抽出来做动态展示。</p>
+          </div>
+
+          <div class="metrics-case-grid">
+            <article class="metrics-case-card reveal-on-scroll">
+              <div class="metrics-media">
+                <img src="./metrics-assets/case-01.png" alt="新品发布 ROI 数据截图" />
+                <div class="metrics-media-overlay">
+                  <span class="card-chip">案例 01</span>
+                  <strong>新品冷启动节奏设计</strong>
+                  <small>从投放测试到成交确认，快速把 ROI 拉进有效区间</small>
+                </div>
+              </div>
+
+              <div class="metrics-stats">
+                <div class="metrics-stat-pill metrics-stat-pill--primary">
+                  <span>直接支付 ROI</span>
+                  <strong class="count-up" data-value="15.4" data-decimals="2">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>点击率</span>
+                  <strong class="count-up" data-value="3.76" data-decimals="2" data-suffix="%">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>直接成交金额</span>
+                  <strong class="count-up" data-value="17867" data-decimals="0">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>转化数</span>
+                  <strong class="count-up" data-value="8" data-decimals="0">0</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="metrics-case-card reveal-on-scroll">
+              <div class="metrics-media">
+                <img src="./metrics-assets/case-02.png" alt="素材平均生命力与 ROI 数据截图" />
+                <div class="metrics-media-overlay">
+                  <span class="card-chip">案例 02</span>
+                  <strong>素材生命力与放量持续性</strong>
+                  <small>让素材不止短期起量，更能延长有效投放周期</small>
+                </div>
+              </div>
+
+              <div class="metrics-stats">
+                <div class="metrics-stat-pill metrics-stat-pill--primary">
+                  <span>素材生命期</span>
+                  <strong class="count-up" data-value="3.5" data-decimals="1" data-suffix="天">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>3 天内 ROI</span>
+                  <strong class="count-up" data-value="13.39" data-decimals="2">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>点击率</span>
+                  <strong class="count-up" data-value="14.13" data-decimals="2" data-suffix="%">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>播放量</span>
+                  <strong class="count-up" data-value="13301" data-decimals="0">0</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="metrics-case-card metrics-case-card--feature reveal-on-scroll">
+              <div class="metrics-feature-top">
+                <div class="metrics-media metrics-media--feature">
+                  <img src="./metrics-assets/case-03-main.png" alt="自创擎天柱原生感促销素材案例总图" />
+                  <div class="metrics-media-overlay">
+                    <span class="card-chip">案例 03</span>
+                    <strong>原生感创意验证，当天完成首单</strong>
+                    <small>自创擎天柱促销素材，从点击吸引到转化验证完成闭环。</small>
+                  </div>
+                </div>
+
+                <div class="metrics-feature-side">
+                  <img src="./metrics-assets/case-03-a.png" alt="案例 03 数据截图 A" />
+                  <img src="./metrics-assets/case-03-b.png" alt="案例 03 数据截图 B" />
+                </div>
+              </div>
+
+              <div class="metrics-stats metrics-stats--feature">
+                <div class="metrics-stat-pill metrics-stat-pill--primary">
+                  <span>首日点击率</span>
+                  <strong class="count-up" data-value="29.38" data-decimals="2" data-suffix="%">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>首日 ROI</span>
+                  <strong class="count-up" data-value="5.54" data-decimals="2">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>次日 ROI</span>
+                  <strong class="count-up" data-value="3.61" data-decimals="2">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>次日播放量</span>
+                  <strong class="count-up" data-value="15185" data-decimals="0">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>首日消耗</span>
+                  <strong class="count-up" data-value="902.31" data-decimals="2">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>次日消耗</span>
+                  <strong class="count-up" data-value="1383.25" data-decimals="2">0</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="metrics-case-card reveal-on-scroll">
+              <div class="metrics-media">
+                <img src="./metrics-assets/case-04.png" alt="擎天柱自创素材五个月投流案例截图" />
+                <div class="metrics-media-overlay">
+                  <span class="card-chip">案例 04</span>
+                  <strong>长周期投流下的稳定出单能力</strong>
+                  <small>素材进入持续跑量阶段后，依然保持明确的成交反馈。</small>
+                </div>
+              </div>
+
+              <div class="metrics-stats">
+                <div class="metrics-stat-pill metrics-stat-pill--primary">
+                  <span>出单量</span>
+                  <strong class="count-up" data-value="216" data-decimals="0" data-suffix="单">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>直接支付 ROI</span>
+                  <strong class="count-up" data-value="3.94" data-decimals="2">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>3 秒播放率</span>
+                  <strong class="count-up" data-value="49.92" data-decimals="2" data-suffix="%">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>直接支付金额</span>
+                  <strong class="count-up" data-value="226942.2" data-decimals="1">0</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="metrics-case-card reveal-on-scroll">
+              <div class="metrics-media">
+                <img src="./metrics-assets/case-05.png" alt="国际电商部黑五视频素材数据截图" />
+                <div class="metrics-media-overlay">
+                  <span class="card-chip">案例 05</span>
+                  <strong>海外节点投放下的素材矩阵控制</strong>
+                  <small>黑五阶段多版本并行测试，用更低成本拿到更稳定点击反馈</small>
+                </div>
+              </div>
+
+              <div class="metrics-stats">
+                <div class="metrics-stat-pill metrics-stat-pill--primary">
+                  <span>总 ROAS</span>
+                  <strong class="count-up" data-value="2.84" data-decimals="2">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>总消耗</span>
+                  <strong class="count-up" data-value="12549.62" data-decimals="2" data-prefix="$">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>总曝光</span>
+                  <strong class="count-up" data-value="443359" data-decimals="0">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>点击率高点</span>
+                  <strong class="count-up" data-value="1.82" data-decimals="2" data-suffix="%">0</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="metrics-case-card reveal-on-scroll">
+              <div class="metrics-media">
+                <img src="./metrics-assets/case-06.png" alt="自创擎天柱户外实拍素材投流案例截图" />
+                <div class="metrics-media-overlay">
+                  <span class="card-chip">案例 06</span>
+                  <strong>户外实拍素材，进入持续成交周期</strong>
+                  <small>从自创造素材到稳定放量，让实拍内容在更长周期内维持成交效率。</small>
+                </div>
+              </div>
+
+              <div class="metrics-stats">
+                <div class="metrics-stat-pill metrics-stat-pill--primary">
+                  <span>累计出单</span>
+                  <strong class="count-up" data-value="94" data-decimals="0" data-suffix="单">0</strong>
+                </div>
+                <div class="metrics-stat-pill metrics-stat-pill--primary">
+                  <span>直接支付 ROI</span>
+                  <strong class="count-up" data-value="4.62" data-decimals="2">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>点击次数</span>
+                  <strong class="count-up" data-value="24122" data-decimals="0">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>直接下单金额</span>
+                  <strong class="count-up" data-value="649939" data-decimals="0">0</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="metrics-case-card reveal-on-scroll">
+              <div class="metrics-media">
+                <img src="./metrics-assets/case-07.png" alt="自创小兵素材直接成交订单案例截图" />
+                <div class="metrics-media-overlay">
+                  <span class="card-chip">案例 07</span>
+                  <strong>自创小兵素材，直接打出成交订单</strong>
+                  <small>用更轻量的自创拍摄内容验证转化能力，让创意不止停留在吸引点击。</small>
+                </div>
+              </div>
+
+              <div class="metrics-stats">
+                <div class="metrics-stat-pill metrics-stat-pill--primary">
+                  <span>直接下单数</span>
+                  <strong class="count-up" data-value="67" data-decimals="0">0</strong>
+                </div>
+                <div class="metrics-stat-pill metrics-stat-pill--primary">
+                  <span>直接支付 ROI</span>
+                  <strong class="count-up" data-value="3.11" data-decimals="2">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>直接下单金额</span>
+                  <strong class="count-up" data-value="200162" data-decimals="0">0</strong>
+                </div>
+                <div class="metrics-stat-pill">
+                  <span>点击率</span>
+                  <strong class="count-up" data-value="6.2" data-decimals="1" data-suffix="%">0</strong>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-block playback-section" id="playbackSection">
+          <div class="section-heading reveal-on-scroll">
+            <span class="section-kicker">ORGANIC REACH / PLAYBACK</span>
+            <h2>视频播放数据</h2>
+            <p>纯自然流播放数据，基本万+起。这里单独作为一组内容表现，突出选题、拍摄与剪辑本身带来的自然传播能力。</p>
+          </div>
+
+          <article class="playback-showcase reveal-on-scroll">
+            <div class="playback-copy">
+              <span class="card-chip">自然流播放</span>
+              <strong>纯自然流内容，稳定打到万级播放起点</strong>
+              <p>不依赖投流加热，靠内容钩子、角色表现和剪辑节奏拿到基础播放量。高点案例进一步放大到十万级自然扩散。</p>
+            </div>
+
+            <div class="playback-highlight-row">
+              <div class="playback-highlight">
+                <span>基础播放带</span>
+                <strong>6.3万+</strong>
+              </div>
+              <div class="playback-highlight">
+                <span>常规破圈带</span>
+                <strong>13.9万+</strong>
+              </div>
+              <div class="playback-highlight">
+                <span>高点自然流</span>
+                <strong>135万+</strong>
+              </div>
+            </div>
+
+            <div class="playback-card-grid">
+              <article class="playback-card">
+                <div class="playback-card-media">
+                  <img src="./playback-assets/playback-01.png" alt="视频播放数据案例 01" />
+                </div>
+                <div class="playback-card-meta">
+                  <span>声波机器人</span>
+                  <strong>6.4万播放</strong>
+                </div>
+              </article>
+
+              <article class="playback-card">
+                <div class="playback-card-media">
+                  <img src="./playback-assets/playback-02.png" alt="视频播放数据案例 02" />
+                </div>
+                <div class="playback-card-meta">
+                  <span>开箱揭秘向</span>
+                  <strong>13.9万播放</strong>
+                </div>
+              </article>
+
+              <article class="playback-card">
+                <div class="playback-card-media">
+                  <img src="./playback-assets/playback-03.png" alt="视频播放数据案例 03" />
+                </div>
+                <div class="playback-card-meta">
+                  <span>汽车人变形</span>
+                  <strong>23.9万播放</strong>
+                </div>
+              </article>
+
+              <article class="playback-card playback-card--featured">
+                <div class="playback-card-media">
+                  <img src="./playback-assets/playback-04.png" alt="视频播放数据案例 04" />
+                </div>
+                <div class="playback-card-meta">
+                  <span>召唤汽车人</span>
+                  <strong>135.0万播放</strong>
+                </div>
+              </article>
+
+              <article class="playback-card">
+                <div class="playback-card-media">
+                  <img src="./playback-assets/playback-05.png" alt="视频播放数据案例 05" />
+                </div>
+                <div class="playback-card-meta">
+                  <span>轻互动节奏向</span>
+                  <strong>6.3万播放</strong>
+                </div>
+              </article>
+            </div>
+          </article>
+        </section>
+
+        <section class="section-block production-section" id="productionSection">
+          <div class="section-heading reveal-on-scroll">
+            <span class="section-kicker">ANNUAL OUTPUT / DELIVERY</span>
+            <h2>年度视频产出</h2>
+            <p>这一组不做后台感很强的条形图，直接保留真实交付截图，让“年度产能、承接范围、项目密度”一眼看明白。</p>
+          </div>
+
+          <div class="production-grid">
+            <article class="production-card production-card--hero reveal-on-scroll">
+              <div class="production-media">
+                <img src="./production-assets/annual-2024-h1.png" alt="2024 年上半年电商信息流投广视频制作截图" />
+                <div class="production-overlay">
+                  <span class="card-chip">2024 上半年</span>
+                  <strong>高频承接中的节奏组织</strong>
+                  <small>年货节节点与常规电商主页视频并行推进，保持稳定的大批量交付节奏。</small>
+                </div>
+              </div>
+              <div class="production-figures production-figures--footer">
+                <div class="production-figure production-figure--primary">
+                  <span>年货节累计产出</span>
+                  <strong class="count-up count-up--spotlight" data-value="240" data-decimals="0" data-suffix="+">0</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="production-card reveal-on-scroll">
+              <div class="production-media">
+                <img src="./production-assets/annual-2024-h2.png" alt="2024 年下半年电商信息流投广视频制作截图" />
+                <div class="production-overlay">
+                  <span class="card-chip">2024 下半年</span>
+                  <strong>节点战役里的持续交付密度</strong>
+                  <small>围绕 618、双 11 等电商关键节点，完成高频素材更新与大规模项目推进</small>
+                </div>
+              </div>
+              <div class="production-figures production-figures--footer production-figures--split">
+                <div class="production-figure">
+                  <span>下半年产出</span>
+                  <strong class="count-up count-up--spotlight" data-value="350" data-decimals="0" data-suffix="+">0</strong>
+                </div>
+                <div class="production-figure">
+                  <span>全年累计交付</span>
+                  <strong class="count-up count-up--spotlight" data-value="670" data-decimals="0" data-suffix="条">0</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="production-card reveal-on-scroll">
+              <div class="production-media">
+                <img src="./production-assets/annual-2025.png" alt="2025 年国内电商视频制作与交付截图" />
+                <div class="production-overlay">
+                  <span class="card-chip">2025 年度</span>
+                  <strong>平台需求变化下的稳定产出</strong>
+                  <small>在国内电商多规格视频需求中，持续维持高频承接与清晰交付能力</small>
+                </div>
+              </div>
+              <div class="production-figures production-figures--footer production-figures--split">
+                <div class="production-figure">
+                  <span>2025 累计交付</span>
+                  <strong class="count-up count-up--spotlight" data-value="570" data-decimals="0" data-suffix="+">0</strong>
+                </div>
+                <div class="production-figure">
+                  <span>2024 对比参考</span>
+                  <strong class="count-up count-up--spotlight" data-value="590" data-decimals="0" data-suffix="+">0</strong>
+                </div>
+              </div>
+            </article>
+
+            <article class="production-card production-card--overseas reveal-on-scroll">
+              <div class="production-overseas-head">
+                <div class="production-overseas-copy">
+                  <span class="card-chip">海外支持</span>
+                  <strong>海外节点项目中的内容支持延展</strong>
+                  <small>围绕新品发布、黑五、开学季与圣诞大促等节奏，为海外团队提供连续的内容交付支持。</small>
+                </div>
+
+                <div class="production-figure production-figure--primary production-figure--headline">
+                  <span>业务支持总量</span>
+                  <strong class="count-up count-up--spotlight" data-value="330" data-decimals="0" data-suffix="+">0</strong>
+                </div>
+              </div>
+
+              <div class="production-overseas-body">
+                <div class="production-overseas-main">
+                  <div class="production-media production-media--overseas">
+                    <img src="./production-assets/annual-overseas-support.png" alt="2025 年海外国际电商部视频承接与交付截图" />
+                  </div>
+
+                  <div class="gif-gallery gif-gallery--overseas">
+                    <div class="gif-gallery-item">
+                      <img src="./gif-assets/promo-01.gif" alt="国际电商促销活动 GIF 01" />
+                    </div>
+                    <div class="gif-gallery-item">
+                      <img src="./gif-assets/promo-02.gif" alt="国际电商促销活动 GIF 02" />
+                    </div>
+                    <div class="gif-gallery-item">
+                      <img src="./gif-assets/promo-03.gif" alt="国际电商促销活动 GIF 03" />
+                    </div>
+                    <div class="gif-gallery-item">
+                      <img src="./gif-assets/promo-04.gif" alt="国际电商促销活动 GIF 04" />
+                    </div>
+                  </div>
+                  <p class="production-overseas-caption">
+                    独立站促销节点动态图内容支持，服务于国际电商活动信息传达、站内引流与转化沟通。
+                  </p>
+                </div>
+
+                <div class="production-overseas-launch">
+                  <video
+                    id="overseasLaunchVideo"
+                    class="production-overseas-launch-video"
+                    src="./video-preview-assets/国外新品发布前预热_x264.mp4"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="auto"
+                  ></video>
+                  <div class="production-overseas-launch-overlay">
+                    <div class="production-overseas-launch-copy">
+                      <span class="production-overseas-launch-kicker">海外新品预热</span>
+                      <strong>发布前，先让期待升温</strong>
+                      <p>面向海外新品上线前的注意力聚拢、信息释放与情绪预热，提供动态视觉内容支持。</p>
+                      <p class="production-overseas-launch-note">预热视频能在发售前持续抬高兴趣与购买欲望，先把期待做起来，再把用户的注意力与预算提前锁定。</p>
+                    </div>
+                    <div class="production-overseas-launch-meta" aria-hidden="true">
+                      <span>PRE-LAUNCH</span>
+                      <span>VISUAL TEASE</span>
+                    </div>
+                  </div>
+                  <button class="production-overseas-sound-toggle" id="overseasLaunchSoundToggle" type="button">开启声音</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-block about-section" id="aboutSection">
+          <div class="about-grid">
+            <div class="section-copy reveal-on-scroll">
+              <span class="section-kicker">ABOUT / CONTACT</span>
+              <h2>我使用的工作软件</h2>
+
+              <div class="hero-links hero-links--about">
+                <a class="ghost-link ghost-link--accent" href="#portfolioHero" onclick="window.__portfolioJump && window.__portfolioJump('#portfolioHero'); return false;">返回主页</a>
+                <a class="ghost-link" href="#portfolioShell" onclick="window.__portfolioJump && window.__portfolioJump('#portfolioShell'); return false;">返回导航栏</a>
+                <a class="ghost-link" href="#resumeDriftSlot" onclick="window.__portfolioJump && window.__portfolioJump('#portfolioHero'); return false;">返回个人简历</a>
+              </div>
+            </div>
+
+            <div class="tools-panel reveal-on-scroll" aria-label="工作工具">
+              <div class="tools-group">
+                <span class="tools-group-kicker">AI 创作 / 生成辅助</span>
+                <div class="tools-grid">
+                  <article class="tool-card">
+                    <span class="tool-icon">C</span>
+                    <strong>CODEX</strong>
+                    <p>用于网页搭建、交互改版、代码调整与快速原型迭代。</p>
+                  </article>
+                  <article class="tool-card">
+                    <span class="tool-icon">G</span>
+                    <strong>GPT</strong>
+                    <p>用于创意发散、文案结构、脚本辅助与多版本表达推演。</p>
+                  </article>
+                  <article class="tool-card">
+                    <span class="tool-icon">即</span>
+                    <strong>即梦 App</strong>
+                    <p>用于 AI 画面生成、视觉氛围测试与创意方向探索。</p>
+                  </article>
+                  <article class="tool-card">
+                    <span class="tool-icon">L</span>
+                    <strong>Lovart.ai</strong>
+                    <p>用于海报感画面、封面风格和视觉素材的快速出图。</p>
+                  </article>
+                  <article class="tool-card">
+                    <span class="tool-icon">K</span>
+                    <strong>KIMI</strong>
+                    <p>用于资料整理、信息归纳、脚本梳理和长文本辅助。</p>
+                  </article>
+                  <article class="tool-card">
+                    <span class="tool-icon">M</span>
+                    <strong>Manus</strong>
+                    <p>用于复杂任务协同、流程拆解与多步骤执行辅助。</p>
+                  </article>
+                </div>
+              </div>
+
+              <div class="tools-group">
+                <span class="tools-group-kicker">剪辑 / 后期 / 调色</span>
+                <div class="tools-grid tools-grid--post">
+                  <article class="tool-card">
+                    <span class="tool-icon">PR</span>
+                    <strong>Premiere Pro</strong>
+                    <p>主力剪辑软件，负责叙事节奏、粗剪精剪与成片输出。</p>
+                  </article>
+                  <article class="tool-card">
+                    <span class="tool-icon">AE</span>
+                    <strong>After Effects</strong>
+                    <p>用于包装、合成、字幕动效与广告片中的视觉强化。</p>
+                  </article>
+                  <article class="tool-card">
+                    <span class="tool-icon">PS</span>
+                    <strong>Photoshop</strong>
+                    <p>用于封面设计、静帧修图、版式整理和物料处理。</p>
+                  </article>
+                  <article class="tool-card">
+                    <span class="tool-icon">DR</span>
+                    <strong>达芬奇调色</strong>
+                    <p>用于画面统一、色彩情绪控制与更电影感的风格塑造。</p>
+                  </article>
+                  <article class="tool-card">
+                    <span class="tool-icon">剪</span>
+                    <strong>剪映</strong>
+                    <p>用于高频短视频快速交付、轻量包装与移动端适配。</p>
+                  </article>
+                </div>
+              </div>
+            </div>
+
+            <figure class="tools-overview-board reveal-on-scroll">
+              <img src="./tool-assets/software-overview.png" alt="我使用的工作软件图标总览" />
+            </figure>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const heroScreen = document.querySelector("#heroScreen");
+      const heroVideo = document.querySelector("#heroVideo");
+      const heroAudioPrompt = document.querySelector("#heroAudioPrompt");
+      const heroAudioPromptText = document.querySelector("#heroAudioPromptText");
+      const soundToggle = document.querySelector("#soundToggle");
+      const scrollCue = document.querySelector("#scrollCue");
+
+      const secondScreen = document.querySelector("#secondScreen");
+      const secondVideo = document.querySelector("#secondVideo");
+      const secondArrow = document.querySelector("#secondArrow");
+
+      const thirdScreen = document.querySelector("#thirdScreen");
+      const thirdTextVideo = document.querySelector("#thirdTextVideo");
+      const thirdArrow = document.querySelector("#thirdArrow");
+
+      const fourthScreen = document.querySelector("#fourthScreen");
+      const fourthVideo = document.querySelector("#fourthVideo");
+      const enterPortfolio = document.querySelector("#enterPortfolio");
+      const portfolioShell = document.querySelector("#portfolioShell");
+      const navShell = document.querySelector(".portfolio-nav-shell");
+      const navLinks = document.querySelectorAll(".portfolio-nav .nav-pill");
+      const resumeDriftCard = document.querySelector("#resumeDriftCard");
+      const resumePreviewButton = document.querySelector("#resumePreviewButton");
+      const resumePreviewImage = document.querySelector("#resumePreviewImage");
+      const resumeUploadInput = document.querySelector("#resumeUploadInput");
+      const resumeDownloadButton = document.querySelector("#resumeDownloadButton");
+      const resumeLightbox = document.querySelector("#resumeLightbox");
+      const resumeLightboxImage = document.querySelector("#resumeLightboxImage");
+      const resumeLightboxClose = document.querySelector("#resumeLightboxClose");
+      const resumeLightboxBackdrop = document.querySelector("#resumeLightboxBackdrop");
+      const overseasLaunchVideo = document.querySelector("#overseasLaunchVideo");
+      const overseasLaunchSoundToggle = document.querySelector("#overseasLaunchSoundToggle");
+      const screens = [heroScreen, secondScreen, thirdScreen, fourthScreen];
+      const revealAt = 24;
+
+      let currentScreenIndex = 0;
+      let hasUnlockedStage = false;
+      let audioUnlocked = false;
+      let heroAudioEnabled = false;
+      let isAnimatingScroll = false;
+      let touchStartY = 0;
+      let secondCompleted = false;
+      let thirdCompleted = false;
+      const fallbackResumeSrc = "./resume-assets/resume-sheet.jpg";
+      const resumeStorageUrl = window.__portfolioRuntime?.resumeUrl?.trim();
+      const resumeUploadApi = window.__portfolioRuntime?.resumeUploadApi?.trim() || "/api/upload-resume";
+
+      function updateSoundButtonLabel() {
+        if (!soundToggle) return;
+
+        if (!audioUnlocked) {
+          soundToggle.textContent = "开启声音";
+          return;
+        }
+
+        soundToggle.textContent = heroAudioEnabled ? "关闭声音" : "开启声音";
+      }
+
+      function unlockStage() {
+        if (hasUnlockedStage) return;
+        hasUnlockedStage = true;
+        heroScreen.classList.add("is-finished");
+        document.body.classList.add("can-scroll");
+        updateSoundButtonLabel();
+      }
+
+      async function playVideo(video, withSound) {
+        if (!video) return;
+
+        video.muted = !withSound;
+        video.volume = withSound ? 1 : 0;
+
+        try {
+          await video.play();
+        } catch (error) {
+          if (withSound) {
+            video.muted = true;
+            video.volume = 0;
+
+            try {
+              await video.play();
+            } catch (fallbackError) {
+              console.error(fallbackError);
+            }
+          } else {
+            console.error(error);
+          }
+        }
+      }
+
+      function pauseVideo(video) {
+        if (!video) return;
+        video.pause();
+      }
+
+      function resetVideo(video) {
+        if (!video) return;
+        pauseVideo(video);
+
+        try {
+          video.currentTime = 0;
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      function hideSequenceArrows() {
+        secondScreen?.classList.remove("is-arrow-visible");
+        thirdScreen?.classList.remove("is-arrow-visible");
+      }
+
+      function resetSecondSequence() {
+        secondCompleted = false;
+        secondScreen?.classList.remove("is-arrow-visible");
+        resetVideo(secondVideo);
+      }
+
+      function resetThirdSequence() {
+        thirdCompleted = false;
+        thirdScreen?.classList.remove("is-arrow-visible");
+        resetVideo(thirdTextVideo);
+      }
+
+      async function enableHeroAudio() {
+        if (!heroVideo) return;
+        audioUnlocked = true;
+        heroAudioEnabled = true;
+        await playVideo(heroVideo, true);
+        heroAudioPrompt?.classList.add("is-dismissed");
+        heroAudioPromptText?.classList.add("is-dismissed");
+        updateSoundButtonLabel();
+      }
+
+      async function startHeroIntro() {
+        if (!heroVideo) return;
+        heroAudioEnabled = false;
+        audioUnlocked = false;
+        heroVideo.muted = true;
+        heroVideo.volume = 0;
+
+        try {
+          await heroVideo.play();
+        } catch (fallbackError) {
+          console.error(fallbackError);
+        }
+
+        updateSoundButtonLabel();
+      }
+
+      async function toggleHeroPlayback() {
+        if (!heroVideo) return;
+
+        if (!audioUnlocked) {
+          await enableHeroAudio();
+          return;
+        }
+
+        heroAudioEnabled = !heroAudioEnabled;
+        heroVideo.muted = !heroAudioEnabled;
+        heroVideo.volume = heroAudioEnabled ? 1 : 0;
+
+        updateSoundButtonLabel();
+      }
+
+      function canAdvanceFromCurrentScreen() {
+        if (currentScreenIndex === 0) return hasUnlockedStage;
+        if (currentScreenIndex === 1) return secondCompleted;
+        if (currentScreenIndex === 2) return thirdCompleted;
+        return currentScreenIndex === 3;
+      }
+
+      function portfolioTop() {
+        return portfolioShell?.offsetTop ?? Number.POSITIVE_INFINITY;
+      }
+
+      function isInPortfolioRegion() {
+        return window.scrollY >= portfolioTop() - 8;
+      }
+
+      function isAtPortfolioTop() {
+        return Math.abs(window.scrollY - portfolioTop()) < 20;
+      }
+
+      function scrollToPortfolioSection(selector) {
+        const target = document.querySelector(selector);
+        if (!target) return;
+
+        const navOffset = (navShell?.offsetHeight ?? 0) + 18;
+        const targetTop = window.scrollY + target.getBoundingClientRect().top - navOffset;
+        isAnimatingScroll = true;
+        currentScreenIndex = screens.length - 1;
+        pauseVideo(fourthVideo);
+
+        window.scrollTo({
+          top: Math.max(0, targetTop),
+          behavior: "smooth"
+        });
+
+        window.setTimeout(() => {
+          isAnimatingScroll = false;
+        }, 650);
+      }
+
+      window.__portfolioJump = (selector) => {
+        if (!selector) return;
+        scrollToPortfolioSection(selector);
+      };
+
+      window.__toggleHeroPlayback = () => {
+        void toggleHeroPlayback();
+      };
+
+      window.__goToSecondScreen = () => {
+        if (!hasUnlockedStage) return;
+        void goToScreen(1);
+      };
+
+      window.__goToThirdScreen = () => {
+        void goToScreen(2);
+      };
+
+      window.__goToFourthScreen = () => {
+        void goToScreen(3);
+      };
+
+      window.__goToPortfolio = () => {
+        goToPortfolio();
+      };
+
+      async function syncScreenMedia(index) {
+        if (index === 0) {
+          resetSecondSequence();
+          resetThirdSequence();
+          pauseVideo(fourthVideo);
+
+          if (heroVideo) {
+            if (heroVideo.paused) {
+              heroVideo.muted = !audioUnlocked || !heroAudioEnabled;
+            } else {
+              await playVideo(heroVideo, audioUnlocked && heroAudioEnabled);
+            }
+          }
+
+          updateSoundButtonLabel();
+          return;
+        }
+
+        pauseVideo(heroVideo);
+        heroVideo.muted = true;
+        updateSoundButtonLabel();
+
+        if (index === 1) {
+          resetSecondSequence();
+          resetThirdSequence();
+          pauseVideo(fourthVideo);
+          await playVideo(secondVideo, true);
+          return;
+        }
+
+        if (index === 2) {
+          pauseVideo(secondVideo);
+          resetThirdSequence();
+          pauseVideo(fourthVideo);
+          await playVideo(thirdTextVideo, true);
+          return;
+        }
+
+        pauseVideo(secondVideo);
+        pauseVideo(thirdTextVideo);
+        await playVideo(fourthVideo, true);
+      }
+
+      async function goToScreen(index) {
+        if (isAnimatingScroll) return;
+        if (index > currentScreenIndex && !canAdvanceFromCurrentScreen()) return;
+        if (!hasUnlockedStage && index !== 0) return;
+
+        const target = screens[index];
+        if (!target) return;
+
+        isAnimatingScroll = true;
+        currentScreenIndex = index;
+
+        if (index !== 1) {
+          secondScreen.classList.remove("is-arrow-visible");
+        }
+
+        if (index !== 2) {
+          thirdScreen.classList.remove("is-arrow-visible");
+        }
+
+        await syncScreenMedia(index);
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        window.setTimeout(() => {
+          isAnimatingScroll = false;
+        }, 900);
+      }
+
+      function goToPortfolio() {
+        if (!portfolioShell || isAnimatingScroll) return;
+
+        isAnimatingScroll = true;
+        currentScreenIndex = screens.length - 1;
+        pauseVideo(fourthVideo);
+
+        const bannerSection = document.querySelector(".portfolio-banner");
+
+        if (bannerSection) {
+          bannerSection.scrollIntoView({ behavior: "smooth", block: "start" });
+
+          window.setTimeout(() => {
+            portfolioShell.scrollIntoView({ behavior: "smooth", block: "start" });
+          }, 2000);
+
+          window.setTimeout(() => {
+            isAnimatingScroll = false;
+          }, 3100);
+
+          return;
+        }
+
+        portfolioShell.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        window.setTimeout(() => {
+          isAnimatingScroll = false;
+        }, 900);
+      }
+
+      function nextScreen() {
+        if (currentScreenIndex === screens.length - 1) {
+          goToPortfolio();
+          return;
+        }
+
+        if (!canAdvanceFromCurrentScreen()) return;
+        void goToScreen(Math.min(screens.length - 1, currentScreenIndex + 1));
+      }
+
+      function prevScreen() {
+        void goToScreen(Math.max(0, currentScreenIndex - 1));
+      }
+
+      function updateOverseasLaunchSoundLabel() {
+        if (!overseasLaunchSoundToggle || !overseasLaunchVideo) return;
+        overseasLaunchSoundToggle.textContent = overseasLaunchVideo.muted ? "开启声音" : "关闭声音";
+      }
+
+      function toggleOverseasLaunchSound() {
+        if (!overseasLaunchVideo) return;
+
+        overseasLaunchVideo.muted = !overseasLaunchVideo.muted;
+        overseasLaunchVideo.volume = overseasLaunchVideo.muted ? 0 : 1;
+        void overseasLaunchVideo.play().catch(() => {
+          overseasLaunchVideo.muted = true;
+          overseasLaunchVideo.volume = 0;
+        });
+        updateOverseasLaunchSoundLabel();
+      }
+
+      function openResumeLightbox() {
+        if (!resumeLightbox || !resumePreviewImage || !resumeLightboxImage) return;
+        resumeLightboxImage.src = resumePreviewImage.src;
+        resumeLightbox.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+
+      function syncResumeTargets(url) {
+        if (!url) return;
+        if (resumePreviewImage) resumePreviewImage.src = url;
+        if (resumeLightboxImage) resumeLightboxImage.src = url;
+        if (resumeDownloadButton) resumeDownloadButton.href = url;
+      }
+
+      async function uploadResumeToServer(file) {
+        const response = await fetch(resumeUploadApi, {
+          method: "POST",
+          headers: {
+            "Content-Type": file.type || "application/octet-stream"
+          },
+          body: file
+        });
+
+        if (!response.ok) {
+          const errorPayload = await response.json().catch(() => ({}));
+          throw new Error(errorPayload.detail || errorPayload.error || "简历上传失败");
+        }
+
+        const payload = await response.json();
+        if (!payload.publicUrl) {
+          throw new Error("未返回新的简历地址");
+        }
+
+        return `${payload.publicUrl}?v=${Date.now()}`;
+      }
+
+      function closeResumeLightbox() {
+        if (!resumeLightbox) return;
+        resumeLightbox.hidden = true;
+        document.body.style.overflow = "";
+      }
+
+      if (heroVideo) {
+        heroVideo.addEventListener("timeupdate", () => {
+          if (heroVideo.currentTime >= revealAt) {
+            unlockStage();
+          }
+        });
+
+        heroVideo.addEventListener("ended", unlockStage);
+      }
+
+      secondVideo?.addEventListener("ended", () => {
+        if (currentScreenIndex !== 1) return;
+        secondCompleted = true;
+        secondScreen.classList.add("is-arrow-visible");
+      });
+
+      thirdTextVideo?.addEventListener("ended", () => {
+        if (currentScreenIndex !== 2) return;
+        thirdCompleted = true;
+        thirdScreen.classList.add("is-arrow-visible");
+      });
+
+      heroScreen?.addEventListener("pointerdown", (event) => {
+        if (event.target === heroAudioPrompt || heroAudioPrompt?.contains(event.target)) return;
+        if (event.target === soundToggle || soundToggle?.contains(event.target)) return;
+        if (event.target === scrollCue || scrollCue?.contains(event.target)) return;
+
+        if (!hasUnlockedStage) {
+          return;
+        }
+
+        void goToScreen(1);
+      });
+
+      window.addEventListener(
+        "wheel",
+        (event) => {
+          if (!hasUnlockedStage) {
+            event.preventDefault();
+            return;
+          }
+
+          if (isInPortfolioRegion()) {
+            if (event.deltaY < -12 && isAtPortfolioTop()) {
+              event.preventDefault();
+              void goToScreen(3);
+            }
+
+            return;
+          }
+
+          if (event.deltaY > 12) {
+            event.preventDefault();
+            nextScreen();
+          } else if (event.deltaY < -12) {
+            event.preventDefault();
+            prevScreen();
+          }
+        },
+        { passive: false }
+      );
+
+      window.addEventListener("keydown", (event) => {
+        if (!hasUnlockedStage) {
+          if (["ArrowDown", "ArrowUp", "PageDown", "PageUp", " ", "Spacebar"].includes(event.key)) {
+            event.preventDefault();
+          }
+          return;
+        }
+
+        if (isInPortfolioRegion()) {
+          if ((event.key === "ArrowUp" || event.key === "PageUp") && isAtPortfolioTop()) {
+            event.preventDefault();
+            void goToScreen(3);
+          }
+
+          return;
+        }
+
+        if (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
+          event.preventDefault();
+          nextScreen();
+        }
+
+        if (event.key === "ArrowUp" || event.key === "PageUp") {
+          event.preventDefault();
+          prevScreen();
+        }
+      });
+
+      window.addEventListener(
+        "touchstart",
+        (event) => {
+          touchStartY = event.touches[0]?.clientY ?? 0;
+
+        },
+        { passive: true }
+      );
+
+      window.addEventListener(
+        "touchmove",
+        (event) => {
+          if (!hasUnlockedStage || !isInPortfolioRegion()) {
+            event.preventDefault();
+          }
+        },
+        { passive: false }
+      );
+
+      window.addEventListener(
+        "touchend",
+        (event) => {
+          if (!hasUnlockedStage) return;
+
+          const endY = event.changedTouches[0]?.clientY ?? touchStartY;
+          const deltaY = touchStartY - endY;
+
+          if (isInPortfolioRegion()) {
+            if (deltaY < -24 && isAtPortfolioTop()) {
+              void goToScreen(3);
+            }
+
+            return;
+          }
+
+          if (deltaY > 24) {
+            nextScreen();
+          } else if (deltaY < -24) {
+            prevScreen();
+          }
+        },
+        { passive: true }
+      );
+
+      const revealItems = document.querySelectorAll(".reveal-on-scroll");
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.18 }
+      );
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+
+      const metricNumbers = document.querySelectorAll(".count-up");
+
+      function animateMetricNumber(element) {
+        if (element.dataset.animated === "true") return;
+        element.dataset.animated = "true";
+
+        const target = Number(element.dataset.value || 0);
+        const decimals = Number(element.dataset.decimals || 0);
+        const prefix = element.dataset.prefix || "";
+        const suffix = element.dataset.suffix || "";
+        const duration = 950;
+        const startTime = performance.now();
+        const formatter = new Intl.NumberFormat("zh-CN", {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals,
+        });
+
+        function updateNumber(now) {
+          const progress = Math.min((now - startTime) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const value = target * eased;
+          const displayValue = decimals > 0 ? value : Math.round(value);
+          element.textContent = prefix + formatter.format(displayValue) + suffix;
+
+          if (progress < 1) {
+            window.requestAnimationFrame(updateNumber);
+          } else {
+            element.classList.remove("is-burst");
+            void element.offsetWidth;
+            element.classList.add("is-burst");
+          }
+        }
+
+        window.requestAnimationFrame(updateNumber);
+      }
+
+      function isElementVisible(element) {
+        const rect = element.getBoundingClientRect();
+        const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+        return rect.top < viewportHeight * 0.92 && rect.bottom > viewportHeight * 0.08;
+      }
+
+      const countUpObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            animateMetricNumber(entry.target);
+            countUpObserver.unobserve(entry.target);
+          });
+        },
+        { threshold: 0.2, rootMargin: "0px 0px -8% 0px" }
+      );
+
+      metricNumbers.forEach((item) => {
+        if (isElementVisible(item)) {
+          animateMetricNumber(item);
+        } else {
+          countUpObserver.observe(item);
+        }
+      });
+
+      overseasLaunchSoundToggle?.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        toggleOverseasLaunchSound();
+      });
+
+      heroAudioPrompt?.addEventListener("click", async (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        await enableHeroAudio();
+      });
+
+      resumePreviewButton?.addEventListener("click", () => {
+        openResumeLightbox();
+      });
+
+      resumeLightboxClose?.addEventListener("click", () => {
+        closeResumeLightbox();
+      });
+
+      resumeLightboxBackdrop?.addEventListener("click", () => {
+        closeResumeLightbox();
+      });
+
+      resumeUploadInput?.addEventListener("change", async (event) => {
+        const file = event.target.files?.[0];
+        if (!file || !resumePreviewImage || !resumeLightboxImage) return;
+
+        const uploadLabel = document.querySelector("label[for='resumeUploadInput']");
+        const originalLabel = uploadLabel?.textContent || "上传新简历预览";
+
+        if (!resumeUploadApi) {
+          const objectUrl = URL.createObjectURL(file);
+          syncResumeTargets(objectUrl);
+          return;
+        }
+
+        try {
+          if (uploadLabel) uploadLabel.textContent = "上传中...";
+          const remoteUrl = await uploadResumeToServer(file);
+          syncResumeTargets(remoteUrl);
+        } catch (error) {
+          console.error(error);
+          const objectUrl = URL.createObjectURL(file);
+          syncResumeTargets(objectUrl);
+          window.alert("线上简历更新失败，当前先仅本地预览。部署并配置 Supabase 后可永久保存更新。");
+        } finally {
+          if (uploadLabel) uploadLabel.textContent = originalLabel;
+          event.target.value = "";
+        }
+      });
+
+      syncResumeTargets(resumeStorageUrl || fallbackResumeSrc);
+
+      hideSequenceArrows();
+      void startHeroIntro();
+      updateSoundButtonLabel();
+      updateOverseasLaunchSoundLabel();
+    </script>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
