@@ -1347,6 +1347,12 @@
         if (resumeDownloadButton) resumeDownloadButton.href = url;
       }
 
+      function buildFreshResumeUrl(url) {
+        if (!url || url.startsWith("blob:") || url.startsWith("data:")) return url;
+        const divider = url.includes("?") ? "&" : "?";
+        return `${url}${divider}v=${Date.now()}`;
+      }
+
       async function uploadResumeToServer(file) {
         const response = await fetch(resumeUploadApi, {
           method: "POST",
@@ -1638,7 +1644,7 @@
         }
       });
 
-      syncResumeTargets(resumeStorageUrl || fallbackResumeSrc);
+      syncResumeTargets(resumeStorageUrl ? buildFreshResumeUrl(resumeStorageUrl) : fallbackResumeSrc);
 
       hideSequenceArrows();
       void startHeroIntro();
