@@ -810,7 +810,6 @@ body.can-scroll {
   pointer-events: none;
 }
 
-
 .portfolio-banner {
   position: relative;
   padding: 0 clamp(1rem, 3vw, 2rem) 1.2rem;
@@ -2283,16 +2282,31 @@ body.can-scroll {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.02)),
     rgba(255, 255, 255, 0.02);
+  isolation: isolate;
+  --monitor-progress: 0;
 }
 
-.metrics-stat-pill span {
+.metrics-stat-pill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.metrics-stat-pill > span {
+  position: relative;
+  z-index: 2;
   display: block;
   color: rgba(255, 255, 255, 0.58);
   letter-spacing: 0.12em;
   font-size: 0.75rem;
 }
 
-.metrics-stat-pill strong {
+.metrics-stat-pill > strong {
+  position: relative;
+  z-index: 2;
   display: block;
   margin-top: 0.8rem;
   font-size: clamp(1.55rem, 3vw, 2.45rem);
@@ -2301,7 +2315,170 @@ body.can-scroll {
   transition:
     transform 0.45s ease,
     text-shadow 0.45s ease,
-    color 0.45s ease;
+    color 0.45s ease,
+    opacity 0.35s ease,
+    filter 0.45s ease;
+}
+
+.metrics-monitor {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+.metrics-monitor-grid,
+.metrics-monitor-wave,
+.metrics-monitor-bars {
+  position: absolute;
+  inset: 0;
+}
+
+.metrics-monitor-grid {
+  background:
+    repeating-linear-gradient(
+      180deg,
+      rgba(140, 229, 255, 0.06) 0,
+      rgba(140, 229, 255, 0.06) 1px,
+      transparent 1px,
+      transparent 10px
+    ),
+    linear-gradient(90deg, rgba(140, 229, 255, 0.04), transparent 28%, transparent 72%, rgba(140, 229, 255, 0.03));
+  opacity: 0.18;
+  transform: translateY(calc(var(--monitor-progress) * 1.5px));
+}
+
+.metrics-monitor-wave {
+  top: auto;
+  left: 8%;
+  right: 8%;
+  bottom: 0.95rem;
+  height: 2rem;
+  border-radius: 999px;
+  opacity: 0.44;
+  background:
+    radial-gradient(circle at 8% 70%, rgba(103, 212, 255, 0.68) 0 10%, transparent 11%),
+    radial-gradient(circle at 18% 34%, rgba(103, 212, 255, 0.5) 0 8%, transparent 9%),
+    radial-gradient(circle at 30% 66%, rgba(103, 212, 255, 0.72) 0 10%, transparent 11%),
+    radial-gradient(circle at 43% 28%, rgba(103, 212, 255, 0.42) 0 8%, transparent 9%),
+    radial-gradient(circle at 58% 74%, rgba(103, 212, 255, 0.78) 0 10%, transparent 11%),
+    radial-gradient(circle at 71% 36%, rgba(103, 212, 255, 0.46) 0 8%, transparent 9%),
+    radial-gradient(circle at 84% 62%, rgba(103, 212, 255, 0.66) 0 10%, transparent 11%);
+  filter: blur(9px);
+  transform: scaleX(0.96);
+  animation: metricsWaveDrift 5.4s linear infinite;
+  animation-delay: var(--monitor-delay, 0s);
+}
+
+.metrics-monitor-bars {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 0.22rem;
+  top: auto;
+  left: 0.95rem;
+  width: 3rem;
+  bottom: 0.95rem;
+  height: 2.25rem;
+  opacity: 0.68;
+}
+
+.metrics-monitor::after {
+  content: "SCANNING SAMPLE";
+  position: absolute;
+  top: 0.72rem;
+  right: 0.9rem;
+  padding: 0.18rem 0.42rem;
+  border-radius: 999px;
+  border: 1px solid rgba(103, 212, 255, 0.14);
+  background: rgba(5, 11, 20, 0.54);
+  color: rgba(166, 234, 255, 0.34);
+  font-size: 0.52rem;
+  letter-spacing: 0.22em;
+  opacity: 0;
+  transform: translateY(-0.18rem);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.metrics-monitor-bars span {
+  display: block;
+  flex: 1 1 0;
+  min-width: 0;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(180deg, rgba(140, 229, 255, 0.88), rgba(86, 191, 255, 0.08));
+  box-shadow: 0 0 12px rgba(103, 212, 255, 0.18);
+  transform-origin: bottom center;
+  animation: metricsBarBounce 1.35s ease-in-out infinite;
+}
+
+.metrics-monitor-bars span:nth-child(1) { height: 30%; animation-delay: calc(var(--monitor-delay, 0s) + 0.04s); }
+.metrics-monitor-bars span:nth-child(2) { height: 62%; animation-delay: calc(var(--monitor-delay, 0s) + 0.11s); }
+.metrics-monitor-bars span:nth-child(3) { height: 44%; animation-delay: calc(var(--monitor-delay, 0s) + 0.18s); }
+.metrics-monitor-bars span:nth-child(4) { height: 86%; animation-delay: calc(var(--monitor-delay, 0s) + 0.26s); }
+.metrics-monitor-bars span:nth-child(5) { height: 54%; animation-delay: calc(var(--monitor-delay, 0s) + 0.34s); }
+.metrics-monitor-bars span:nth-child(6) { height: 92%; animation-delay: calc(var(--monitor-delay, 0s) + 0.42s); }
+.metrics-monitor-bars span:nth-child(7) { height: 48%; animation-delay: calc(var(--monitor-delay, 0s) + 0.5s); }
+.metrics-monitor-bars span:nth-child(8) { height: 72%; animation-delay: calc(var(--monitor-delay, 0s) + 0.58s); }
+
+.metrics-stat-pill.is-monitoring .metrics-monitor-grid {
+  opacity: 0.28;
+}
+
+.metrics-stat-pill.is-monitoring::after {
+  opacity: 1;
+  background:
+    linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent calc((var(--monitor-progress) * 100%) - 12%),
+      rgba(140, 229, 255, 0.04) calc((var(--monitor-progress) * 100%) - 5%),
+      rgba(173, 236, 255, 0.18) calc(var(--monitor-progress) * 100%),
+      rgba(140, 229, 255, 0.06) calc((var(--monitor-progress) * 100%) + 7%),
+      transparent calc((var(--monitor-progress) * 100%) + 16%),
+      transparent 100%
+    );
+}
+
+.metrics-stat-pill.is-monitoring .metrics-monitor-wave {
+  opacity: 0.44;
+  filter: blur(8px);
+}
+
+.metrics-stat-pill.is-monitoring .metrics-monitor-bars span {
+  animation-duration: 0.6s;
+  box-shadow:
+    0 0 8px rgba(103, 212, 255, 0.18),
+    0 0 14px rgba(103, 212, 255, 0.08);
+}
+
+.metrics-stat-pill.is-sampling .metrics-monitor::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.metrics-stat-pill.is-sampling > strong {
+  color: rgba(214, 244, 255, 0.46);
+  opacity: 0.58;
+  filter: blur(0.35px);
+}
+
+.metrics-stat-pill.is-sample-ready > strong {
+  color: rgba(246, 251, 255, 0.96);
+  opacity: 1;
+  filter: none;
+}
+
+.metrics-stat-pill.is-monitor-burst::after {
+  background:
+    linear-gradient(90deg, transparent, rgba(116, 223, 255, 0.1), transparent),
+    linear-gradient(180deg, rgba(103, 212, 255, 0.08), transparent 58%);
+  animation: metricsMonitorFlash 0.7s cubic-bezier(0.24, 0.9, 0.28, 1);
 }
 
 .metrics-stat-pill--primary {
@@ -2324,7 +2501,7 @@ body.can-scroll {
 }
 
 .count-up.is-burst {
-  animation: countBurst 0.48s cubic-bezier(0.2, 0.9, 0.25, 1);
+  animation: countBurst 0.62s cubic-bezier(0.2, 0.9, 0.25, 1);
 }
 
 .metrics-feature-top {
@@ -2993,18 +3170,86 @@ body.can-scroll {
 
 @keyframes countBurst {
   0% {
-    transform: scale(0.9);
-    opacity: 0.7;
+    transform: scale(0.975) translateY(0.12rem);
+    opacity: 0.82;
+    text-shadow:
+      0 0 0 rgba(103, 212, 255, 0),
+      0 0 0 rgba(103, 212, 255, 0);
   }
 
-  52% {
-    transform: scale(1.08);
+  34% {
+    transform: scale(1.03) translateY(-0.06rem);
     opacity: 1;
+    text-shadow:
+      0 0 12px rgba(103, 212, 255, 0.28),
+      0 0 24px rgba(103, 212, 255, 0.14);
+  }
+
+  68% {
+    transform: scale(1.045) translateY(-0.1rem);
+    opacity: 1;
+    text-shadow:
+      0 0 16px rgba(103, 212, 255, 0.42),
+      0 0 36px rgba(103, 212, 255, 0.2);
   }
 
   100% {
     transform: scale(1);
     opacity: 1;
+    text-shadow:
+      0 0 10px rgba(103, 212, 255, 0.2),
+      0 0 24px rgba(103, 212, 255, 0.08);
+  }
+}
+
+@keyframes metricsWaveDrift {
+  0% {
+    transform: scaleX(0.95);
+    opacity: 0.28;
+  }
+
+  50% {
+    transform: scaleX(1);
+    opacity: 0.42;
+  }
+
+  100% {
+    transform: scaleX(0.95);
+    opacity: 0.28;
+  }
+}
+
+@keyframes metricsBarBounce {
+  0%,
+  100% {
+    transform: scaleY(0.52);
+    opacity: 0.46;
+  }
+
+  35% {
+    transform: scaleY(1.08);
+    opacity: 0.94;
+  }
+
+  65% {
+    transform: scaleY(0.72);
+    opacity: 0.68;
+  }
+}
+
+@keyframes metricsMonitorFlash {
+  0% {
+    opacity: 0;
+    transform: translateX(-28%);
+  }
+
+  24% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(26%);
   }
 }
 
@@ -3199,6 +3444,7 @@ body.can-scroll {
   .social-card--cyan {
     grid-column: span 6;
   }
+
 }
 
 @media (max-width: 780px) {

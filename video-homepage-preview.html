@@ -59,7 +59,7 @@
         <video
           class="screen-video hero-video"
           id="heroVideo"
-          src="./video-preview-assets/开头场记板动画_web.mp4"
+          src="../video-preview-assets/开头场记板动画_web.mp4"
           autoplay
           muted
           playsinline
@@ -98,7 +98,7 @@
         <video
           class="screen-video second-video"
           id="secondVideo"
-          src="./video-preview-assets/第二屏视频.mp4"
+          src="../video-preview-assets/第二屏视频.mp4"
           muted
           playsinline
           preload="auto"
@@ -118,7 +118,7 @@
         <video
           class="screen-video third-text-video"
           id="thirdTextVideo"
-          src="./video-preview-assets/第三屏更新视频.mp4"
+          src="../video-preview-assets/第三屏更新视频.mp4"
           muted
           playsinline
           preload="auto"
@@ -138,7 +138,7 @@
         <video
           class="screen-video fourth-video"
           id="fourthVideo"
-          src="./video-preview-assets/第三屏视频.mp4"
+          src="../video-preview-assets/第三屏视频.mp4"
           muted
           loop
           playsinline
@@ -412,7 +412,7 @@
             </a>
             <a
               class="work-card work-card--cyan work-card--product-mix reveal-on-scroll"
-              href="./video-preview-assets/公司产品集合_x264.mp4"
+              href="../video-preview-assets/公司产品集合_x264.mp4"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -896,7 +896,7 @@
                   <video
                     id="overseasLaunchVideo"
                     class="production-overseas-launch-video"
-                    src="./video-preview-assets/国外新品发布前预热_x264.mp4"
+                    src="../video-preview-assets/国外新品发布前预热_x264.mp4"
                     autoplay
                     muted
                     loop
@@ -1605,6 +1605,32 @@
       revealItems.forEach((item) => revealObserver.observe(item));
 
       const metricNumbers = document.querySelectorAll(".count-up");
+      const metricsStatPills = document.querySelectorAll(".metrics-stat-pill");
+
+      metricsStatPills.forEach((pill, index) => {
+        if (pill.querySelector(".metrics-monitor")) return;
+
+        const monitor = document.createElement("i");
+        monitor.className = "metrics-monitor";
+        monitor.setAttribute("aria-hidden", "true");
+        monitor.style.setProperty("--monitor-delay", `${index * 0.12}s`);
+        monitor.innerHTML = `
+          <i class="metrics-monitor-grid"></i>
+          <i class="metrics-monitor-wave"></i>
+          <i class="metrics-monitor-bars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </i>
+        `;
+
+        pill.appendChild(monitor);
+      });
 
       function animateMetricNumber(element) {
         if (element.dataset.animated === "true") return;
@@ -1616,21 +1642,44 @@
         const suffix = element.dataset.suffix || "";
         const duration = 950;
         const startTime = performance.now();
+        const statPill = element.closest(".metrics-stat-pill");
         const formatter = new Intl.NumberFormat("zh-CN", {
           minimumFractionDigits: decimals,
           maximumFractionDigits: decimals,
         });
 
+        if (statPill) {
+          statPill.classList.add("is-monitoring");
+          statPill.classList.remove("is-sampling");
+          statPill.classList.remove("is-monitor-burst");
+          void statPill.offsetWidth;
+          statPill.classList.add("is-sampling");
+        }
+
         function updateNumber(now) {
           const progress = Math.min((now - startTime) / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
+          const revealProgress = Math.max(0, (progress - 0.22) / 0.78);
+          const eased = 1 - Math.pow(1 - revealProgress, 3);
           const value = target * eased;
           const displayValue = decimals > 0 ? value : Math.round(value);
           element.textContent = prefix + formatter.format(displayValue) + suffix;
 
+          if (statPill) {
+            statPill.style.setProperty("--monitor-progress", progress.toFixed(3));
+            statPill.classList.toggle("is-sample-ready", progress >= 0.24);
+          }
+
           if (progress < 1) {
             window.requestAnimationFrame(updateNumber);
           } else {
+            if (statPill) {
+              statPill.classList.remove("is-sampling");
+              statPill.classList.remove("is-sample-ready");
+              statPill.classList.remove("is-monitoring");
+              statPill.classList.remove("is-monitor-burst");
+              void statPill.offsetWidth;
+              statPill.classList.add("is-monitor-burst");
+            }
             element.classList.remove("is-burst");
             void element.offsetWidth;
             element.classList.add("is-burst");
@@ -1727,7 +1776,6 @@
     </script>
   </body>
 </html>
-
 
 
 
