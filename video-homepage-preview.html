@@ -19,6 +19,18 @@
           <div class="hero-loader-core">
             <p class="hero-loader-title">正在加载 请稍等</p>
             <div class="hero-loader-timeline">
+              <div class="hero-loader-meta" aria-hidden="true">
+                <span class="hero-loader-status">
+                  <i class="hero-loader-status-dot"></i>
+                  <span id="heroLoaderStatusText">SEQUENCE READY</span>
+                </span>
+                <span class="hero-loader-marker-row">
+                  <i></i>
+                  <i></i>
+                  <i></i>
+                </span>
+                <span class="hero-loader-subcode" id="heroLoaderSubcode">TC 00:00:24:08</span>
+              </div>
               <span class="hero-loader-track-label hero-loader-track-label--video" aria-hidden="true">V1</span>
               <span class="hero-loader-track-label hero-loader-track-label--audio" aria-hidden="true">A1</span>
               <span class="hero-loader-ruler" aria-hidden="true"></span>
@@ -1043,6 +1055,8 @@
       const heroLoader = document.querySelector("#heroLoader");
       const heroLoaderCopy = document.querySelector("#heroLoaderCopy");
       const heroLoaderAudioStrip = document.querySelector("#heroLoaderAudioStrip");
+      const heroLoaderStatusText = document.querySelector("#heroLoaderStatusText");
+      const heroLoaderSubcode = document.querySelector("#heroLoaderSubcode");
       const portfolioShell = document.querySelector("#portfolioShell");
       const navShell = document.querySelector(".portfolio-nav-shell");
       const navLinks = document.querySelectorAll(".portfolio-nav .nav-pill");
@@ -1089,6 +1103,23 @@
           bar.style.setProperty("--wave-delay", `${(index % 18) * 0.05}s`);
           heroLoaderAudioStrip.appendChild(bar);
         });
+      }
+
+      if (heroLoaderStatusText) {
+        const loaderStatusFrames = ["SEQUENCE READY", "MEDIA ONLINE", "PREVIEW SYNC"];
+        let loaderStatusIndex = 0;
+        window.setInterval(() => {
+          loaderStatusIndex = (loaderStatusIndex + 1) % loaderStatusFrames.length;
+          heroLoaderStatusText.textContent = loaderStatusFrames[loaderStatusIndex];
+        }, 1400);
+      }
+
+      if (heroLoaderSubcode) {
+        let subcodeFrame = 8;
+        window.setInterval(() => {
+          subcodeFrame = (subcodeFrame + 1) % 25;
+          heroLoaderSubcode.textContent = `TC 00:00:24:${String(subcodeFrame).padStart(2, "0")}`;
+        }, 120);
       }
 
       function updateSoundButtonLabel() {
