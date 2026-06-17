@@ -1625,18 +1625,20 @@ body.can-scroll {
   margin-top: 2rem;
   display: grid;
   gap: 0.85rem;
+  justify-items: center;
 }
 
 .marquee-track {
   display: flex;
   gap: 0.85rem;
   width: max-content;
-  animation: marqueeMove 22s linear infinite;
+  max-width: min(100%, 84rem);
+  justify-content: center;
+  animation: marqueeMove 18s ease-in-out infinite alternate;
 }
 
 .marquee-track--reverse {
-  animation-direction: reverse;
-  animation-duration: 26s;
+  animation-duration: 20s;
 }
 
 .marquee-track span {
@@ -3008,11 +3010,11 @@ body.can-scroll {
 
 @keyframes marqueeMove {
   from {
-    transform: translateX(0);
+    transform: translateX(-4%);
   }
 
   to {
-    transform: translateX(-22%);
+    transform: translateX(4%);
   }
 }
 
