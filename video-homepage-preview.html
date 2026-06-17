@@ -29,12 +29,21 @@
                 <i></i>
                 <i></i>
                 <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
               </span>
               <span class="hero-loader-clips hero-loader-clips--lower" aria-hidden="true">
                 <i></i>
                 <i></i>
                 <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
               </span>
+              <span class="hero-loader-audio-strip" id="heroLoaderAudioStrip" aria-hidden="true"></span>
               <span class="hero-loader-timecode" aria-hidden="true">00:00:24:08</span>
               <span class="hero-loader-playhead"></span>
               <span class="hero-loader-glow"></span>
@@ -1033,6 +1042,7 @@
       const enterPortfolio = document.querySelector("#enterPortfolio");
       const heroLoader = document.querySelector("#heroLoader");
       const heroLoaderCopy = document.querySelector("#heroLoaderCopy");
+      const heroLoaderAudioStrip = document.querySelector("#heroLoaderAudioStrip");
       const portfolioShell = document.querySelector("#portfolioShell");
       const navShell = document.querySelector(".portfolio-nav-shell");
       const navLinks = document.querySelectorAll(".portfolio-nav .nav-pill");
@@ -1064,6 +1074,22 @@
       const fallbackResumeSrc = "./resume-assets/resume-sheet.jpg";
       const resumeStorageUrl = window.__portfolioRuntime?.resumeUrl?.trim();
       const resumeUploadApi = window.__portfolioRuntime?.resumeUploadApi?.trim() || "/api/upload-resume";
+
+      if (heroLoaderAudioStrip && !heroLoaderAudioStrip.children.length) {
+        const audioPatternBase = [
+          18, 24, 16, 32, 22, 40, 28, 20, 36, 26, 48, 30,
+          22, 34, 18, 42, 26, 20, 38, 28, 16, 30, 24, 44
+        ];
+        const desiredBarCount = 260;
+
+        Array.from({ length: desiredBarCount }).forEach((_, index) => {
+          const height = audioPatternBase[index % audioPatternBase.length];
+          const bar = document.createElement("b");
+          bar.style.setProperty("--wave-height", `${height}%`);
+          bar.style.setProperty("--wave-delay", `${(index % 18) * 0.05}s`);
+          heroLoaderAudioStrip.appendChild(bar);
+        });
+      }
 
       function updateSoundButtonLabel() {
         if (!soundToggle) return;
