@@ -9,7 +9,53 @@
   </head>
   <body>
     <main class="page-shell">
-      <section class="screen hero-screen" id="heroScreen">
+      <section class="screen hero-screen is-loader-active" id="heroScreen">
+        <div class="hero-loader" id="heroLoader" aria-hidden="true">
+          <div class="hero-loader-particles">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <div class="hero-loader-core">
+            <p class="hero-loader-title">正在加载 请稍等</p>
+            <div class="hero-loader-timeline">
+              <span class="hero-loader-track-label hero-loader-track-label--video" aria-hidden="true">V1</span>
+              <span class="hero-loader-track-label hero-loader-track-label--audio" aria-hidden="true">A1</span>
+              <span class="hero-loader-ruler" aria-hidden="true"></span>
+              <span class="hero-loader-track"></span>
+              <span class="hero-loader-ticks" aria-hidden="true"></span>
+              <span class="hero-loader-clips" aria-hidden="true">
+                <i></i>
+                <i></i>
+                <i></i>
+                <i></i>
+              </span>
+              <span class="hero-loader-clips hero-loader-clips--lower" aria-hidden="true">
+                <i></i>
+                <i></i>
+                <i></i>
+              </span>
+              <span class="hero-loader-timecode" aria-hidden="true">00:00:24:08</span>
+              <span class="hero-loader-playhead"></span>
+              <span class="hero-loader-glow"></span>
+            </div>
+            <div class="hero-loader-wave" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <p class="hero-loader-copy" id="heroLoaderCopy">素材载入时间线</p>
+          </div>
+        </div>
         <video
           class="screen-video hero-video"
           id="heroVideo"
@@ -981,6 +1027,8 @@
       const fourthScreen = document.querySelector("#fourthScreen");
       const fourthVideo = document.querySelector("#fourthVideo");
       const enterPortfolio = document.querySelector("#enterPortfolio");
+      const heroLoader = document.querySelector("#heroLoader");
+      const heroLoaderCopy = document.querySelector("#heroLoaderCopy");
       const portfolioShell = document.querySelector("#portfolioShell");
       const navShell = document.querySelector(".portfolio-nav-shell");
       const navLinks = document.querySelectorAll(".portfolio-nav .nav-pill");
@@ -1006,6 +1054,9 @@
       let touchStartY = 0;
       let secondCompleted = false;
       let thirdCompleted = false;
+      let heroLoaderDismissed = false;
+      const heroLoaderStartedAt = performance.now();
+      const heroLoaderMinimumVisible = 1200;
       const fallbackResumeSrc = "./resume-assets/resume-sheet.jpg";
       const resumeStorageUrl = window.__portfolioRuntime?.resumeUrl?.trim();
       const resumeUploadApi = window.__portfolioRuntime?.resumeUploadApi?.trim() || "/api/upload-resume";
@@ -1027,6 +1078,23 @@
         heroScreen.classList.add("is-finished");
         document.body.classList.add("can-scroll");
         updateSoundButtonLabel();
+      }
+
+      function hideHeroLoader() {
+        if (heroLoaderDismissed || !heroLoader) return;
+
+        const elapsed = performance.now() - heroLoaderStartedAt;
+        const delay = Math.max(0, heroLoaderMinimumVisible - elapsed);
+        heroLoaderDismissed = true;
+
+        window.setTimeout(() => {
+          heroLoader.classList.add("is-hidden");
+          heroScreen?.classList.remove("is-loader-active");
+
+          window.setTimeout(() => {
+            heroLoader.hidden = true;
+          }, 760);
+        }, delay);
       }
 
       async function playVideo(video, withSound) {
@@ -1103,10 +1171,18 @@
         heroVideo.muted = true;
         heroVideo.volume = 0;
 
+        if (heroLoaderCopy) {
+          heroLoaderCopy.textContent = "素材载入时间线";
+        }
+
         try {
           await heroVideo.play();
         } catch (fallbackError) {
           console.error(fallbackError);
+        }
+
+        if (heroVideo.readyState >= 2) {
+          hideHeroLoader();
         }
 
         updateSoundButtonLabel();
@@ -1372,6 +1448,10 @@
       }
 
       if (heroVideo) {
+        heroVideo.addEventListener("loadeddata", hideHeroLoader);
+        heroVideo.addEventListener("canplay", hideHeroLoader);
+        heroVideo.addEventListener("playing", hideHeroLoader);
+
         heroVideo.addEventListener("timeupdate", () => {
           if (heroVideo.currentTime >= revealAt) {
             unlockStage();
