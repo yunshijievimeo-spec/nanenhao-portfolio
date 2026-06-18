@@ -3124,6 +3124,9 @@ body.can-scroll {
   position: absolute;
   inset: 0;
   margin: 0;
+  display: grid;
+  place-items: center;
+  background: rgba(5, 8, 15, 0.96);
 }
 
 .lifestyle-mural-visual::after {
@@ -3141,7 +3144,8 @@ body.can-scroll {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  object-position: center center;
 }
 
 .tools-panel {
