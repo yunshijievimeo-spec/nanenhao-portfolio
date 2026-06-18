@@ -3106,6 +3106,44 @@ body.can-scroll {
   padding-bottom: 4rem;
 }
 
+.lifestyle-section {
+  padding-bottom: 5rem;
+}
+
+.lifestyle-mural {
+  position: relative;
+  min-height: 42rem;
+  border-radius: 2.2rem;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.18);
+}
+
+.lifestyle-mural-visual {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+
+.lifestyle-mural-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 50% 50%, rgba(5, 8, 15, 0) 68%, rgba(5, 8, 15, 0.14) 86%, rgba(5, 8, 15, 0.28) 100%),
+    linear-gradient(90deg, rgba(5, 8, 15, 0.36), rgba(5, 8, 15, 0.02) 8%, rgba(5, 8, 15, 0.02) 92%, rgba(5, 8, 15, 0.36)),
+    linear-gradient(180deg, rgba(5, 8, 15, 0.34), rgba(5, 8, 15, 0.02) 10%, rgba(5, 8, 15, 0.02) 90%, rgba(5, 8, 15, 0.34));
+  pointer-events: none;
+}
+
+.lifestyle-mural-visual img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .tools-panel {
   grid-column: 2;
   grid-row: 1 / span 2;
@@ -3534,6 +3572,10 @@ body.can-scroll {
 
   .tools-grid--post {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .lifestyle-mural {
+    min-height: 54rem;
   }
 
   .company-grid,
