@@ -119,10 +119,10 @@
         <video
           class="screen-video second-video"
           id="secondVideo"
-          src="../video-preview-assets/第二屏视频.mp4"
+          data-src="../video-preview-assets/第二屏视频.mp4"
           muted
           playsinline
-          preload="auto"
+          preload="none"
         ></video>
         <div class="screen-overlay second-overlay"></div>
 
@@ -139,10 +139,10 @@
         <video
           class="screen-video third-text-video"
           id="thirdTextVideo"
-          src="../video-preview-assets/第三屏更新视频.mp4"
+          data-src="../video-preview-assets/第三屏更新视频.mp4"
           muted
           playsinline
-          preload="auto"
+          preload="none"
         ></video>
         <div class="screen-overlay third-overlay"></div>
 
@@ -159,11 +159,11 @@
         <video
           class="screen-video fourth-video"
           id="fourthVideo"
-          src="../video-preview-assets/第三屏视频.mp4"
+          data-src="../video-preview-assets/第三屏视频.mp4"
           muted
           loop
           playsinline
-          preload="auto"
+          preload="none"
         ></video>
         <div class="screen-overlay fourth-overlay"></div>
 
@@ -917,12 +917,11 @@
                   <video
                     id="overseasLaunchVideo"
                     class="production-overseas-launch-video"
-                    src="../video-preview-assets/国外新品发布前预热_x264.mp4"
-                    autoplay
+                    data-src="../video-preview-assets/国外新品发布前预热_x264.mp4"
                     muted
                     loop
                     playsinline
-                    preload="auto"
+                    preload="none"
                   ></video>
                   <div class="production-overseas-launch-overlay">
                     <div class="production-overseas-launch-copy">
@@ -1068,6 +1067,7 @@
       const portfolioShell = document.querySelector("#portfolioShell");
       const navShell = document.querySelector(".portfolio-nav-shell");
       const navLinks = document.querySelectorAll(".portfolio-nav .nav-pill");
+      const productionSection = document.querySelector("#productionSection");
       const resumeDriftCard = document.querySelector("#resumeDriftCard");
       const resumePreviewButton = document.querySelector("#resumePreviewButton");
       const resumePreviewImage = document.querySelector("#resumePreviewImage");
@@ -1091,8 +1091,20 @@
       let secondCompleted = false;
       let thirdCompleted = false;
       let heroLoaderDismissed = false;
+      let heroSequencePrefetched = false;
       const heroLoaderStartedAt = performance.now();
       const heroLoaderMinimumVisible = 1200;
+
+      function runWhenIdle(task, delay = 0) {
+        window.setTimeout(() => {
+          if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(() => task(), { timeout: 1200 });
+            return;
+          }
+
+          task();
+        }, delay);
+      }
       const fallbackResumeSrc = "./resume-assets/resume-sheet.jpg";
       const resumeStorageUrl = window.__portfolioRuntime?.resumeUrl?.trim();
       const resumeUploadApi = window.__portfolioRuntime?.resumeUploadApi?.trim() || "/api/upload-resume";
@@ -1206,6 +1218,34 @@
         }
       }
 
+      function prepareVideoSource(video, preloadMode = "metadata") {
+        if (!video) return;
+
+        const pendingSrc = video.dataset.src;
+        if (preloadMode) {
+          video.preload = preloadMode;
+        }
+
+        if (pendingSrc && !video.getAttribute("src")) {
+          video.src = pendingSrc;
+          video.load();
+          return;
+        }
+
+        if (video.getAttribute("src") && video.readyState === 0) {
+          video.load();
+        }
+      }
+
+      function warmHeroSequence() {
+        if (heroSequencePrefetched) return;
+        heroSequencePrefetched = true;
+
+        runWhenIdle(() => prepareVideoSource(secondVideo, "metadata"), 160);
+        runWhenIdle(() => prepareVideoSource(thirdTextVideo, "metadata"), 880);
+        runWhenIdle(() => prepareVideoSource(fourthVideo, "metadata"), 1620);
+      }
+
       function hideSequenceArrows() {
         secondScreen?.classList.remove("is-arrow-visible");
         thirdScreen?.classList.remove("is-arrow-visible");
@@ -1239,6 +1279,7 @@
         audioUnlocked = false;
         heroVideo.muted = true;
         heroVideo.volume = 0;
+        warmHeroSequence();
 
         if (heroLoaderCopy) {
           heroLoaderCopy.textContent = "素材载入时间线";
@@ -1360,6 +1401,8 @@
         updateSoundButtonLabel();
 
         if (index === 1) {
+          prepareVideoSource(secondVideo, "auto");
+          runWhenIdle(() => prepareVideoSource(thirdTextVideo, "metadata"), 220);
           resetSecondSequence();
           resetThirdSequence();
           pauseVideo(fourthVideo);
@@ -1368,6 +1411,8 @@
         }
 
         if (index === 2) {
+          prepareVideoSource(thirdTextVideo, "auto");
+          runWhenIdle(() => prepareVideoSource(fourthVideo, "metadata"), 220);
           pauseVideo(secondVideo);
           resetThirdSequence();
           pauseVideo(fourthVideo);
@@ -1375,6 +1420,7 @@
           return;
         }
 
+        prepareVideoSource(fourthVideo, "auto");
         pauseVideo(secondVideo);
         pauseVideo(thirdTextVideo);
         await playVideo(fourthVideo, true);
@@ -1458,6 +1504,7 @@
 
       function toggleOverseasLaunchSound() {
         if (!overseasLaunchVideo) return;
+        prepareVideoSource(overseasLaunchVideo, "auto");
 
         overseasLaunchVideo.muted = !overseasLaunchVideo.muted;
         overseasLaunchVideo.volume = overseasLaunchVideo.muted ? 0 : 1;
@@ -1520,6 +1567,7 @@
         heroVideo.addEventListener("loadeddata", hideHeroLoader);
         heroVideo.addEventListener("canplay", hideHeroLoader);
         heroVideo.addEventListener("playing", hideHeroLoader);
+        heroVideo.addEventListener("loadeddata", warmHeroSequence, { once: true });
 
         heroVideo.addEventListener("timeupdate", () => {
           if (heroVideo.currentTime >= revealAt) {
@@ -1668,6 +1716,23 @@
       );
 
       revealItems.forEach((item) => revealObserver.observe(item));
+
+      if (productionSection && overseasLaunchVideo) {
+        const productionVideoObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+
+              prepareVideoSource(overseasLaunchVideo, "auto");
+              void playVideo(overseasLaunchVideo, false);
+              productionVideoObserver.disconnect();
+            });
+          },
+          { rootMargin: "420px 0px", threshold: 0.06 }
+        );
+
+        productionVideoObserver.observe(productionSection);
+      }
 
       const metricNumbers = document.querySelectorAll(".count-up");
       const metricsStatPills = document.querySelectorAll(".metrics-stat-pill");
