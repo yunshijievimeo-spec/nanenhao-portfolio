@@ -3148,6 +3148,180 @@ body.can-scroll {
   object-position: center center;
 }
 
+.velorah-section {
+  position: relative;
+  min-height: 100vh;
+  padding: 0;
+  overflow: hidden;
+  background: hsl(201 100% 13%);
+}
+
+.velorah-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% center;
+}
+
+.velorah-shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.liquid-glass {
+  position: relative;
+  overflow: hidden;
+  border: none;
+  background: rgba(255, 255, 255, 0.01);
+  background-blend-mode: luminosity;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+}
+
+.liquid-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.4px;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.45) 0%,
+    rgba(255, 255, 255, 0.15) 20%,
+    rgba(255, 255, 255, 0) 40%,
+    rgba(255, 255, 255, 0) 60%,
+    rgba(255, 255, 255, 0.15) 80%,
+    rgba(255, 255, 255, 0.45) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+.velorah-hero {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem 9rem;
+  text-align: center;
+}
+
+.velorah-hero-inner {
+  width: min(100%, 76rem);
+  margin: 0 auto;
+  padding: 0 2.4rem;
+  transform: translate(-4.8rem, -14rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.velorah-title {
+  margin: 0;
+  color: hsl(0 0% 100%);
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(3rem, 7vw, 7.2rem);
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: -0.08em;
+}
+
+.velorah-copy {
+  max-width: 42rem;
+  margin: 2rem auto 0;
+  color: hsl(240 4% 66%);
+  font-size: clamp(1rem, 1.55vw, 1.125rem);
+  line-height: 1.72;
+}
+
+.velorah-title--cn {
+  max-width: fit-content;
+  white-space: nowrap;
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 3.5vw, 4rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: 0.015em;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.velorah-copy--cn {
+  max-width: fit-content;
+  margin-top: 1.55rem;
+  color: rgba(236, 241, 250, 0.88);
+  font-size: clamp(1.18rem, 1.5vw, 1.45rem);
+  line-height: 1.68;
+  letter-spacing: 0.045em;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.velorah-typing-line {
+  min-height: 1.2em;
+}
+
+.velorah-typing-line--sub {
+  min-height: 1.75em;
+}
+
+.velorah-typing-line.is-typing::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 0.96em;
+  margin-left: 0.16rem;
+  background: currentColor;
+  vertical-align: -0.08em;
+  animation: velorahCaretBlink 1s step-end infinite;
+}
+
+@keyframes velorahCaretBlink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes fade-rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.velorah-fade-rise {
+  animation: fade-rise 0.8s ease-out both;
+}
+
+.velorah-fade-rise-delay {
+  animation: fade-rise 0.8s ease-out 0.2s both;
+}
+
+.velorah-fade-rise-delay-2 {
+  animation: fade-rise 0.8s ease-out 0.4s both;
+}
+
 .tools-panel {
   grid-column: 2;
   grid-row: 1 / span 2;
@@ -3628,6 +3802,10 @@ body.can-scroll {
     grid-column: span 6;
   }
 
+  .velorah-title--cn {
+    white-space: normal;
+  }
+
 }
 
 @media (max-width: 780px) {
@@ -3774,6 +3952,23 @@ body.can-scroll {
   .social-card--cyan {
     grid-column: auto;
     min-height: 16rem;
+  }
+
+  .velorah-hero {
+    padding: 2.8rem 1.2rem 6rem;
+  }
+
+  .velorah-hero-inner {
+    padding: 0 1rem;
+    transform: translate(-1.4rem, -4.4rem);
+  }
+
+  .velorah-title--cn {
+    font-size: clamp(2rem, 9.5vw, 3rem);
+  }
+
+  .velorah-copy--cn {
+    font-size: clamp(1.04rem, 4vw, 1.24rem);
   }
 }
 

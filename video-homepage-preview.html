@@ -265,7 +265,8 @@
                     我习惯快速进入状态，也乐于持续学习新工具、新流程和新的内容表达方式。无论是品牌营销、社媒内容、直播转化，还是 AI 参与下的新型内容生产，我都希望自己不是被动跟随变化的人，而是能够主动理解变化、使用变化、创造变化的人。
                   </p>
                   <p>
-                    工作之外，喜欢骑行、爬山和接近自然，让身体和注意力都保持在线。对我来说，持续创作、持续学习、持续前进，不是阶段性的热情，而是一种稳定的生活方式。未来也希望和有意思的人一起，把有意思的事做成，把值得长期投入的事真正做出结果。
+                    文字只是我的一面，面聊也许更能看见完整的我。<br /><br />
+                    如果有机会，希望能面对面聊一聊，把经历、想法和做事方式讲得更完整些。
                   </p>
                 </div>
               </div>
@@ -1037,6 +1038,33 @@
             </figure>
           </div>
         </section>
+
+        <section class="section-block velorah-section">
+          <video
+            class="velorah-video"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260314_131748_f2ca2a28-fed7-44c8-b9a9-bd9acdd5ec31.mp4"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+          ></video>
+
+          <div class="velorah-shell">
+            <div class="velorah-hero">
+              <div class="velorah-hero-inner">
+                <h2
+                  class="velorah-title velorah-title--cn velorah-fade-rise velorah-typing-line"
+                  data-typing-text="文字只是我的一面，面聊也许更能看见完整的我"
+                ></h2>
+                <p
+                  class="velorah-copy velorah-copy--cn velorah-fade-rise-delay velorah-typing-line velorah-typing-line--sub"
+                  data-typing-text="如果有机会，希望能面对面聊一聊，把经历、想法和做事方式讲得更完整些"
+                ></p>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </main>
 
@@ -1079,6 +1107,7 @@
       const resumeLightboxBackdrop = document.querySelector("#resumeLightboxBackdrop");
       const overseasLaunchVideo = document.querySelector("#overseasLaunchVideo");
       const overseasLaunchSoundToggle = document.querySelector("#overseasLaunchSoundToggle");
+      const velorahTypingLines = document.querySelectorAll(".velorah-typing-line");
       const screens = [heroScreen, secondScreen, thirdScreen, fourthScreen];
       const revealAt = 24;
 
@@ -1092,6 +1121,7 @@
       let thirdCompleted = false;
       let heroLoaderDismissed = false;
       let heroSequencePrefetched = false;
+      let velorahTypingStarted = false;
       const heroLoaderStartedAt = performance.now();
       const heroLoaderMinimumVisible = 1200;
 
@@ -1825,6 +1855,55 @@
         return rect.top < viewportHeight * 0.92 && rect.bottom > viewportHeight * 0.08;
       }
 
+      function startVelorahTypingLoop() {
+        if (velorahTypingStarted || !velorahTypingLines.length) return;
+        velorahTypingStarted = true;
+
+        const wait = (ms) =>
+          new Promise((resolve) => {
+            window.setTimeout(resolve, ms);
+          });
+
+        const typeLine = (line, speed) =>
+          new Promise((resolve) => {
+            const content = line.dataset.typingText || "";
+            let index = 0;
+            line.textContent = "";
+            line.classList.add("is-typing");
+
+            const timer = window.setInterval(() => {
+              line.textContent += content.charAt(index);
+              index += 1;
+
+              if (index >= content.length) {
+                window.clearInterval(timer);
+                line.classList.remove("is-typing");
+                resolve();
+              }
+            }, speed);
+          });
+
+        const loop = async () => {
+          while (true) {
+            velorahTypingLines.forEach((line) => {
+              line.textContent = "";
+              line.classList.remove("is-typing");
+            });
+
+            await typeLine(velorahTypingLines[0], 88);
+            await wait(420);
+
+            if (velorahTypingLines[1]) {
+              await typeLine(velorahTypingLines[1], 46);
+            }
+
+            await wait(5000);
+          }
+        };
+
+        void loop();
+      }
+
       const countUpObserver = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -1844,6 +1923,21 @@
           countUpObserver.observe(item);
         }
       });
+
+      if (velorahTypingLines.length) {
+        const velorahTypingObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              startVelorahTypingLoop();
+              velorahTypingObserver.disconnect();
+            });
+          },
+          { threshold: 0.28 }
+        );
+
+        velorahTypingObserver.observe(velorahTypingLines[0]);
+      }
 
       overseasLaunchSoundToggle?.addEventListener("click", (event) => {
         event.preventDefault();
