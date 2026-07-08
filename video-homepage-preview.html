@@ -1552,11 +1552,26 @@
         document.body.style.overflow = "hidden";
       }
 
+      let resumeFallbackApplied = false;
+
       function syncResumeTargets(url) {
         if (!url) return;
         if (resumePreviewImage) resumePreviewImage.src = url;
         if (resumeLightboxImage) resumeLightboxImage.src = url;
         if (resumeDownloadButton) resumeDownloadButton.href = url;
+      }
+
+      function applyResumeFallback() {
+        if (resumeFallbackApplied) return;
+        resumeFallbackApplied = true;
+        syncResumeTargets(fallbackResumeSrc);
+      }
+
+      function bindResumeFallback(image) {
+        if (!image) return;
+        image.addEventListener("error", () => {
+          applyResumeFallback();
+        });
       }
 
       function buildFreshResumeUrl(url) {
@@ -1962,6 +1977,9 @@
       resumeLightboxBackdrop?.addEventListener("click", () => {
         closeResumeLightbox();
       });
+
+      bindResumeFallback(resumePreviewImage);
+      bindResumeFallback(resumeLightboxImage);
 
       resumeUploadInput?.addEventListener("change", async (event) => {
         const file = event.target.files?.[0];
