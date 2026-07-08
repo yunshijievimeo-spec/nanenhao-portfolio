@@ -1247,6 +1247,27 @@ body.can-scroll {
   z-index: 1;
 }
 
+.resume-drift-sheet::after {
+  content: "+ 放大";
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.1rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  background: rgba(8, 12, 22, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  pointer-events: none;
+}
+
 .resume-drift-sheet img {
   display: block;
   width: 100%;
@@ -1606,6 +1627,10 @@ body.can-scroll {
   border-radius: 0;
   background: transparent;
   box-shadow: 0 30px 80px rgba(0, 0, 0, 0.34);
+  transform-origin: center top;
+  transition: transform 0.18s ease;
+  will-change: transform;
+  cursor: zoom-in;
 }
 
 .resume-lightbox-close {
