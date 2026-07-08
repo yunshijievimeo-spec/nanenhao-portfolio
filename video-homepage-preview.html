@@ -209,6 +209,8 @@
                 <h2>个人简历</h2>
                 <p>点击可放大看</p>
                 <div class="hero-links hero-links--resume">
+                  <button class="ghost-link ghost-link--accent" id="resumeExpandButton" type="button">点击放大查看简历</button>
+                  <a class="ghost-link" id="resumeDownloadInlineButton" href="./resume-assets/resume-sheet.jpg" download="南恩号-个人简历.jpg">下载简历</a>
                   <label class="ghost-link ghost-link--accent" for="resumeUploadInput">上传新简历预览</label>
                 </div>
                 <input class="resume-upload-input" id="resumeUploadInput" type="file" accept="image/*" />
@@ -1098,9 +1100,11 @@
       const productionSection = document.querySelector("#productionSection");
       const resumeDriftCard = document.querySelector("#resumeDriftCard");
       const resumePreviewButton = document.querySelector("#resumePreviewButton");
+      const resumeExpandButton = document.querySelector("#resumeExpandButton");
       const resumePreviewImage = document.querySelector("#resumePreviewImage");
       const resumeUploadInput = document.querySelector("#resumeUploadInput");
       const resumeDownloadButton = document.querySelector("#resumeDownloadButton");
+      const resumeDownloadInlineButton = document.querySelector("#resumeDownloadInlineButton");
       const resumeLightbox = document.querySelector("#resumeLightbox");
       const resumeLightboxImage = document.querySelector("#resumeLightboxImage");
       const resumeLightboxClose = document.querySelector("#resumeLightboxClose");
@@ -1559,6 +1563,7 @@
         if (resumePreviewImage) resumePreviewImage.src = url;
         if (resumeLightboxImage) resumeLightboxImage.src = url;
         if (resumeDownloadButton) resumeDownloadButton.href = url;
+        if (resumeDownloadInlineButton) resumeDownloadInlineButton.href = url;
       }
 
       function applyResumeFallback() {
@@ -1967,6 +1972,10 @@
       });
 
       resumePreviewButton?.addEventListener("click", () => {
+        openResumeLightbox();
+      });
+
+      resumeExpandButton?.addEventListener("click", () => {
         openResumeLightbox();
       });
 
